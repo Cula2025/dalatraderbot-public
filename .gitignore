@@ -1,4 +1,12 @@
-.venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*.log
+.venv/
+.env
+.vscode/
+.DS_Store
+Thumbs.db
+node_modules/
+dist/
+build/
 .streamlit/
