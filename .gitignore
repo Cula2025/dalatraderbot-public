@@ -10,3 +10,14 @@ node_modules/
 dist/
 build/
 .streamlit/
+# secrets & env
+.env
+# python cache & venv
+__pycache__/
+.venv/
+# artefakter/logg
+logs/
+output/
+state/
+# streamlit cache
+.streamlit/
