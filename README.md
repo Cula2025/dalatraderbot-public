@@ -34,3 +34,5 @@ trader-bot-clean/
 ├── requirements.txt
 └── README.md
 ```
+
+CI retry 2025-08-31T23:29:59.9579878+02:00
