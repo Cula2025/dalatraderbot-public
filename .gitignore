@@ -21,3 +21,5 @@ output/
 state/
 # streamlit cache
 .streamlit/
+
+hemlig.txt

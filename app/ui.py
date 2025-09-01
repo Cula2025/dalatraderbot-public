@@ -180,3 +180,7 @@ if run:
         st.error(f"Fel: {e}")
 else:
     st.info("Välj parametrar i **sidopanelen** och klicka **🚀 Kör backtest**.")
+
+
+
+
