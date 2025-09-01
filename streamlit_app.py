@@ -1,34 +1,19 @@
 import streamlit as st
-import subprocess, sys, os
+import sys, subprocess, shlex, pkgutil
 
 st.set_page_config(page_title="Dalatraderbot", layout="wide")
 st.title("Dalatraderbot ✅")
 
-# ---- Basform (behåll om du vill) ----
+# ---- Initiera state EN gång (utan widget-defaults som krockar) ----
 defaults = {"ticker":"AAPL","period":"6mo","interval":"1d","fast":10,"slow":20}
 for k,v in defaults.items():
-    st.session_state.setdefault(k,v)
+    st.session_state.setdefault(k, v)
 
-with st.form("inputs"):
-    col1, col2 = st.columns(2)
-    with col1:
-        st.text_input("Ticker", key="ticker")
-        st.selectbox("Period", ["3mo","6mo","1y","2y"], key="period")
-        st.number_input("Snabb SMA", 3, 100, key="fast")
-    with col2:
-        st.selectbox("Intervall", ["1d","1h","1wk"], key="interval")
-        st.number_input("Långsam SMA", 5, 300, key="slow")
-    go = st.form_submit_button("Kör")
-
-if go:
-    st.success(
-        f"Input mottaget. Ticker={st.session_state['ticker']}, "
-        f"period={st.session_state['period']}, intervall={st.session_state['interval']}"
-    )
-
-# ---- Helper: kör modul och visa stdout/stderr ----
-def run_module(mod_name: str, *args: str):
-    cmd = [sys.executable, "-m", mod_name, *args]
+# ---- Hjälpare: kör modul och visa stdout/stderr ----
+def run_module(mod_name: str, args_line: str = ""):
+    cmd = [sys.executable, "-m", mod_name]
+    if args_line.strip():
+        cmd += shlex.split(args_line)
     st.write("Kör:", " ".join(cmd))
     with st.spinner("Kör…"):
         proc = subprocess.run(cmd, capture_output=True, text=True)
@@ -39,26 +24,41 @@ def run_module(mod_name: str, *args: str):
     else:
         st.error(f"Avslutades med kod {proc.returncode}")
 
-# ---- Flikar för skripten i app/ ----
-tab1, tab2, tab3 = st.tabs(["trading_bot", "alert_bot", "alert_batch"])
+# ---- Upptäck backtest-moduler i app/ ----
+def list_backtest_modules():
+    try:
+        import app  # kräver att app/__init__.py finns (du har lagt in det)
+    except Exception as e:
+        st.error(f"Kunde inte importera paketet 'app': {e}")
+        return []
+    mods = []
+    for m in pkgutil.iter_modules(app.__path__):
+        name = m.name
+        if name == "backtest" or name.startswith("bt_"):
+            mods.append(name)
+    return sorted(mods)
 
-with tab1:
+# ---- Flikar ----
+tab_bt, tab_trading, tab_alert = st.tabs(["Backtest", "trading_bot", "alert_bot"])
+
+with tab_bt:
+    st.subheader("Kör backtest-modul från `app/`")
+    mods = list_backtest_modules()
+    if not mods:
+        st.warning("Hittade inga moduler som heter `backtest.py` eller börjar på `bt_` i `app/`.")
+    else:
+        st.selectbox("Välj modul", mods, key="bt_module")
+        st.text_input("Valfria CLI-argument (t.ex. --ticker AAPL --days 200)", key="bt_args")
+        if st.button("Kör backtest"):
+            run_module(f"app.{st.session_state['bt_module']}", st.session_state["bt_args"])
+
+with tab_trading:
     st.caption("Kör `app/trading_bot.py`")
     if st.button("Starta trading_bot"):
         run_module("app.trading_bot")
 
-with tab2:
+with tab_alert:
     st.caption("Kör `app/alert_bot.py`")
     if st.button("Starta alert_bot"):
         run_module("app.alert_bot")
-
-with tab3:
-    st.caption("Kör `app/alert_batch.py`")
-    if st.button("Kör alert_batch"):
-        run_module("app.alert_batch")
-
-# ---- (valfritt) visa om hemligheter finns (utan att skriva ut dem) ----
-has_token = bool(os.getenv("TELEGRAM_TOKEN") or st.secrets.get("TELEGRAM_TOKEN", ""))
-if has_token:
-    st.caption("🔐 Telegram-token hittad via env/secrets.")
 
