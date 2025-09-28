@@ -1,16 +1,31 @@
-# Python/venv/cache
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
+.cache/
+.mypy_cache/
+.pytest_cache/
+
+# Envs & lokala saker
 .venv/
-.env
-# Kör- och loggdata
+env/
+.venv*/
+venv*/
+*.env
+*.env.*
+/etc/dalatrader.env
+
+# Streamlit & lokalt
+.streamlit/
+*.log
+
+# Data/outputs
 outputs/
 data/
-logs/
-# Lokala files
-*.sqlite
-*.db
-# System
+
+# OS/editor
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+storage/
