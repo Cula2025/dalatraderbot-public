@@ -1,0 +1,16 @@
+# Python/venv/cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.env
+# Kör- och loggdata
+outputs/
+data/
+logs/
+# Lokala files
+*.sqlite
+*.db
+# System
+.DS_Store
+Thumbs.db
