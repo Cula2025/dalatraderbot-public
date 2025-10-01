@@ -42,39 +42,7 @@ def atr(df: pd.DataFrame, window:int=14) -> pd.Series:
 # ========= Parametrar =========
 @dataclass
 class Params:
-    # === FULL PARAM SURFACE ===
-    use_rsi_filter: bool = True
-    rsi_window: int = 14
-    rsi_min: float = 30.0
-    rsi_max: float = 70.0
-
-    use_trend_filter: bool = False
-    trend_ma_type: str = "EMA"     # "EMA" | "SMA"
-    trend_ma_window: int = 100
-
-    breakout_lookback: int = 55
-    exit_lookback: int = 20
-
-    use_macd_filter: bool = False
-    macd_fast: int = 12
-    macd_slow: int = 26
-    macd_signal: int = 9
-
-    use_bb_filter: bool = False
-    bb_window: int = 20
-    bb_nstd: float = 2.0
-    bb_min: float = 0.0
-
-    use_stop_loss: bool = False
-    stop_mode: str = "pct"         # "pct" | "atr"
-    stop_loss_pct: float = 0.08
-
-    atr_window: int = 14
-    atr_mult: float = 2.0
-
-    use_atr_trailing: bool = False
-    atr_trail_mult: float = 1.5
-
+    # RSI
     use_rsi_filter: bool = True
     rsi_window: int      = 14
     rsi_min: float       = 25.0
@@ -175,50 +143,10 @@ def _compute_signals(df: pd.DataFrame, p: Params) -> pd.DataFrame:
     return x
 
 # ========= Backtest =========
-def _clip_by_dates(df, p):
-    """Returnera df klippt till [from_date, to_date] om de finns i p."""
-    import pandas as pd
-    start = getattr(p, "from_date", None) if not isinstance(p, dict) else p.get("from_date")
-    end   = getattr(p, "to_date",   None) if not isinstance(p, dict) else p.get("to_date")
-    if not start and not end:
-        return df
-    x = df.copy()
-    # Se till att vi kan jämföra mot en datetime-index/kolumn
-    if "Date" in getattr(x, "columns", []):
-        x["Date"] = pd.to_datetime(x["Date"], errors="coerce")
-        idx = x["Date"]
-        use_index = False
-    else:
-        try:
-            x.index = pd.to_datetime(x.index, errors="coerce")
-            idx = x.index
-            use_index = True
-        except Exception:
-            return df  # kan inte klippa på ett säkert sätt
-    s = pd.to_datetime(start) if start else None
-    e = pd.to_datetime(end)   if end   else None
-    mask = pd.Series(True, index=x.index)
-    if s is not None:
-        mask &= (idx >= s)
-    if e is not None:
-        mask &= (idx <= e)
-    return x.loc[mask]
-
 def run_backtest(df: pd.DataFrame, p: Params) -> Dict[str, Any]:
-    # Coerce dict -> Params so we can access attributes like p.rsi_window
-    if isinstance(p, dict):
-        try:
-            # bara nycklar som finns i Params-annoteringarna
-            keys = getattr(Params, '__annotations__', {}).keys()
-            filtered = {k: v for k, v in p.items() if k in (keys or [])}
-            p = Params(**filtered)
-        except Exception as e:
-            raise TypeError(f'Could not build Params from dict: {e}')
-
     df = _fix_df_source(df, (p if isinstance(p, dict) else (vars(p) if hasattr(p, "__dict__") else None)))
 
     x = _normalize_df(df)
-    x = _clip_by_dates(x, p)
     x = _compute_signals(x, p)
 
     cash = 100_000.0
@@ -435,7 +363,7 @@ def _coerce_df(df, _depth=0, _max_depth=5):
 def _GET_OHLCV_DEBUG(*args, **kwargs):
     from app.data_providers import get_ohlcv as GET_OHLCV
     import json
-    df = GET_OHLCV(*args, **kwargs)
+    df = _GET_OHLCV_DEBUG(*args, **kwargs)
     try:
         tname = type(df).__name__
         preview = None
@@ -453,8 +381,6 @@ def _GET_OHLCV_DEBUG(*args, **kwargs):
         print(f"[bt-debug] GET_OHLCV logging failed: {type(e).__name__}: {e}", flush=True)
     return df
 # --- helper: if df is actually a ticker string, fetch data first ---
-
-
 
 def _fix_df_source(df, params):
     """If df is a ticker string, fetch OHLCV. params may be dict or object."""

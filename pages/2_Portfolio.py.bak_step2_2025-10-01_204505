@@ -66,7 +66,7 @@ with st.sidebar:
 
     st.subheader("Inställningar")
     start = st.date_input("Startdatum", value=date(2020,1,1))
-    prof_dir_str = st.text_input("Profilkatalog", value="/srv/trader/app/profiles")
+    prof_dir_str = st.text_input("Profilkatalog", value="outputs/opt_results")
     use_auto_universe = st.checkbox("Använd alla tickers i profilkatalogen", value=True)
     tickers_text = st.text_area(
         "Tickers (en per rad eller kommaseparerat)",
@@ -234,49 +234,3 @@ with tab3:
                     st.info("Inga affärer i perioden.")
             except Exception as e:
                 st.error(f"Kunde inte hämta transaktioner: {e}")
-
-# --- EXPOSURE DEBUG BLOCK ---
-# Visar brutto/netto/long/short-exponering samt varnar om brutto > cap_total.
-try:
-    import streamlit as st
-    import pandas as pd
-    import numpy as np
-
-    _can_run = all(name in globals() for name in ["W", "cap_per_asset", "cap_total"])
-    if _can_run:
-        _W = W.copy()  # vikts-matris (tid x tillgångar)
-        gross = _W.abs().sum(axis=1)                   # bruttoexponering
-        long_expo = _W.clip(lower=0).sum(axis=1)       # lång-exponering
-        short_expo = (-_W.clip(upper=0)).sum(axis=1)   # kort-exponering
-        net = _W.sum(axis=1)                            # netto
-
-        eps = 1e-9
-        breach_mask = gross > (cap_total + eps)
-        breach_any = bool(breach_mask.any())
-        breach_date = breach_mask.idxmax() if breach_any else None
-        breach_val  = float(gross.loc[breach_date]) if breach_any else None
-
-        st.subheader("Exponering / kapitalanvändning")
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Max brutto", f"{gross.max():.2f}×")
-        c2.metric("Max netto", f"{net.abs().max():.2f}×")
-        c3.metric("Max long", f"{long_expo.max():.2f}×")
-        c4.metric("Max short", f"{short_expo.max():.2f}×")
-
-        if breach_any:
-            st.error(
-                f"⚠️ Bruttoexponering {breach_val:.2f}× över max {cap_total:.2f}× "
-                f"på {pd.to_datetime(breach_date).date()}"
-            )
-        else:
-            st.success("✅ Ingen bruttoexponering över max – kapitalanvändning OK.")
-    else:
-        st.caption("[exposure] väntar på W/caps (sektionen körs efter att portföljen byggts).")
-except Exception as _ex:
-    try:
-        import streamlit as st
-        st.caption(f"[exposure] {type(_ex).__name__}: {_ex}")
-    except Exception:
-        pass
-# --- END EXPOSURE DEBUG BLOCK ---
-

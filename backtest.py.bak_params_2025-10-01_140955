@@ -42,39 +42,7 @@ def atr(df: pd.DataFrame, window:int=14) -> pd.Series:
 # ========= Parametrar =========
 @dataclass
 class Params:
-    # === FULL PARAM SURFACE ===
-    use_rsi_filter: bool = True
-    rsi_window: int = 14
-    rsi_min: float = 30.0
-    rsi_max: float = 70.0
-
-    use_trend_filter: bool = False
-    trend_ma_type: str = "EMA"     # "EMA" | "SMA"
-    trend_ma_window: int = 100
-
-    breakout_lookback: int = 55
-    exit_lookback: int = 20
-
-    use_macd_filter: bool = False
-    macd_fast: int = 12
-    macd_slow: int = 26
-    macd_signal: int = 9
-
-    use_bb_filter: bool = False
-    bb_window: int = 20
-    bb_nstd: float = 2.0
-    bb_min: float = 0.0
-
-    use_stop_loss: bool = False
-    stop_mode: str = "pct"         # "pct" | "atr"
-    stop_loss_pct: float = 0.08
-
-    atr_window: int = 14
-    atr_mult: float = 2.0
-
-    use_atr_trailing: bool = False
-    atr_trail_mult: float = 1.5
-
+    # RSI
     use_rsi_filter: bool = True
     rsi_window: int      = 14
     rsi_min: float       = 25.0

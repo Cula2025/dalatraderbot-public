@@ -8,7 +8,6 @@ from typing import Dict, Any, List
 
 import pandas as pd
 import streamlit as st
-from app.btwrap import run_backtest as RUN_BT
 
 
 # --- helper: build current payload for backtest ---
@@ -116,70 +115,3 @@ with st.sidebar.expander("DEBUG payload", expanded=False):
         st.write("DEBUG payload misslyckades:", type(e).__name__, str(e))
         st.code(traceback.format_exc())
 
-
-# --- MINIMAL RUN (auto/backtest+render) ---
-# Bygger och visar resultat – samt fel – i högerkolumnen.
-# Kör antingen när du trycker 'Kör backtest' eller auto om ticker+params finns.
-
-def _nice(x):
-    try:
-        return float(x)
-    except Exception:
-        return x
-
-# layout
-col_left, col_right = st.columns([1, 2], gap="large")
-
-with col_left:
-    payload = _current_params_payload()
-    tkr = (payload.get("ticker") or "").strip()
-    st.text_input("Ticker", key="ticker", value=tkr)  # visar vad som ligger i state
-    do_run = st.button("Kör backtest", use_container_width=True)
-
-with col_right:
-    try:
-        payload = _current_params_payload()
-        tkr = (payload.get("ticker") or '').strip()
-        params = payload.get("params") or {}
-
-        # krav för körning
-        ready = bool(tkr) and bool(params)
-        if not ready and do_run:
-            st.warning("Ange ticker och parametrar först (ex via profil-laddaren).")
-
-        if ready and (do_run or st.session_state.get("__autorun__", True)):
-            res = RUN_BT(payload)   # <-- KÖR BACKTESTEN
-            # Visa sammanfattning
-            summ = res.get("summary", {})
-            st.subheader("Resultat")
-            st.write({
-                "TotalReturn": _nice(summ.get("TotalReturn")),
-                "SharpeD":     _nice(summ.get("SharpeD")),
-                "MaxDD":       _nice(summ.get("MaxDD")),
-                "BuyHold":     _nice(summ.get("BuyHold")),
-                "FinalEquity": _nice(summ.get("FinalEquity")),
-                "Trades":      _nice(summ.get("Trades")),
-                "Bars":        _nice(summ.get("Bars")),
-            })
-
-            # Equity-kurva (visa de sista raderna)
-            eq = res.get("equity")
-            if hasattr(eq, "tail"):
-                st.caption("Equity (sista 10 rader)")
-                st.dataframe(eq.tail(10), use_container_width=True, hide_index=True)
-
-            # Trades (visa de sista raderna)
-            tr = res.get("trades")
-            if hasattr(tr, "tail"):
-                st.caption("Trades (sista 10)")
-                try:
-                    st.dataframe(tr.tail(10), use_container_width=True, hide_index=True)
-                except Exception:
-                    st.write(tr.tail(10))
-        else:
-            st.info("Klar för körning. Välj profil → 'Använd i Backtest' i vänstern, sedan 'Kör backtest'.")
-    except Exception as _e:
-        import traceback
-        st.error(f"Backtest felade: {type(_e).__name__}: {_e}")
-        st.code(traceback.format_exc())
-# --- /MINIMAL RUN ---

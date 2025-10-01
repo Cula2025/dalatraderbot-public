@@ -2,6 +2,8 @@
 from datetime import date
 from pathlib import Path
 import streamlit as st
+from app.debug_banner import show as debug_banner
+debug_banner('Debug 0.1')
 
 # Branding (logo, fonter, CSS, page config)
 try:

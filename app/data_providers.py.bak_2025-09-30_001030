@@ -1,6 +1,5 @@
 ﻿from __future__ import annotations
 import os
-os.environ.setdefault("BORSDATA_API_KEY", "85218870c1744409b0624920db023ba8")  # fallback
 from typing import Optional
 import pandas as pd
 from app.bd_modern_client import (
@@ -14,7 +13,10 @@ __all__ = ["BDModernAdapter", "get_client", "get_ohlcv", "using_hardcoded_key"]
 # --- Börsdata API-nyckel via miljövariabel ---
 _BD_API_KEY = os.getenv('BORSDATA_API_KEY')
 if not _BD_API_KEY:
-    pass
+    raise RuntimeError('Saknar BORSDATA_API_KEY i miljön. Sätt i /etc/dalatrader.env')
+# ------------------------------------------------
+
+
 def get_client() -> str:
     return _get_client_key()
 
