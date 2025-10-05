@@ -28,8 +28,8 @@
         "atr_mult": 2.818599646292402,
         "use_atr_trailing": false,
         "atr_trail_mult": 1.3806548970898116,
-        "from_date": "2020-10-03",
-        "to_date": "2025-10-04"
+        "from_date": "2020-10-04",
+        "to_date": "2025-10-05"
       },
       "metrics": {
         "Bars": 1259,
@@ -70,8 +70,8 @@
         "atr_mult": 1.6757567080389535,
         "use_atr_trailing": true,
         "atr_trail_mult": 2.554383352523911,
-        "from_date": "2020-10-03",
-        "to_date": "2025-10-04"
+        "from_date": "2020-10-04",
+        "to_date": "2025-10-05"
       },
       "metrics": {
         "Bars": 1259,
@@ -112,8 +112,8 @@
         "atr_mult": 2.9779273242073145,
         "use_atr_trailing": true,
         "atr_trail_mult": 1.237438129968723,
-        "from_date": "2020-10-03",
-        "to_date": "2025-10-04"
+        "from_date": "2020-10-04",
+        "to_date": "2025-10-05"
       },
       "metrics": {
         "Bars": 1259,
