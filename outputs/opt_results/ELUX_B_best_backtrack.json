@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "ELUX B – conservative",
+      "ticker": "ELUX B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 23,
+        "rsi_min": 34.665958683084085,
+        "rsi_max": 56.98347343500398,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 146,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 11,
+        "macd_slow": 28,
+        "macd_signal": 9,
+        "use_bb_filter": true,
+        "bb_window": 21,
+        "bb_nstd": 2.2102470067733253,
+        "bb_min": 0.4020974991168741,
+        "use_stop_loss": true,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.08817695326318083,
+        "atr_window": 18,
+        "atr_mult": 2.2358784270536107,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.1039857988742767
+      },
+      "metrics": {
+        "TotalReturn": 0.5059061588076494,
+        "MaxDD": -0.19470101758568814,
+        "SharpeD": 0.736735540185213,
+        "BuyHold": -0.7231736056559308,
+        "CAGR": 0.0854828760063795
+      }
+    },
+    {
+      "name": "ELUX B – balanced",
+      "ticker": "ELUX B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 22,
+        "rsi_min": 29.87698516284859,
+        "rsi_max": 79.6439714302935,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 96,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 21,
+        "macd_signal": 7,
+        "use_bb_filter": true,
+        "bb_window": 25,
+        "bb_nstd": 2.0151288494468353,
+        "bb_min": 0.25183936727069545,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.05459630837678068,
+        "atr_window": 12,
+        "atr_mult": 2.3226206585542375,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.877735777275112
+      },
+      "metrics": {
+        "TotalReturn": 0.9310917962156038,
+        "MaxDD": -0.16141189937961076,
+        "SharpeD": 0.8284462526972504,
+        "BuyHold": -0.7231736056559308,
+        "CAGR": 0.14093916463492007
+      }
+    },
+    {
+      "name": "ELUX B – aggressive",
+      "ticker": "ELUX B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 26,
+        "rsi_min": 31.834957466284184,
+        "rsi_max": 76.67340851479338,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 113,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 30,
+        "macd_signal": 11,
+        "use_bb_filter": true,
+        "bb_window": 18,
+        "bb_nstd": 2.4161120852540017,
+        "bb_min": 0.3447749753127983,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.09227059348123298,
+        "atr_window": 17,
+        "atr_mult": 2.3210783318773505,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 3.088440471269573
+      },
+      "metrics": {
+        "TotalReturn": 0.8619202694532437,
+        "MaxDD": -0.10492263058684992,
+        "SharpeD": 1.028001253822354,
+        "BuyHold": -0.7231736056559308,
+        "CAGR": 0.13263107281998532
+      }
+    }
+  ]
+}

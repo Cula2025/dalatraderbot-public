@@ -1,0 +1,2 @@
+ticker,entry_date,entry_price,exit_date,exit_price,qty,pnl,ret,exit_reason
+ORX,2025-06-05,18.5,2025-06-09,19.78,5405.405405405405,6918.918918918925,0.06918918918918925,breakeven

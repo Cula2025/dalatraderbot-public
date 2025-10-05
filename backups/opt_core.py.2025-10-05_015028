@@ -1,0 +1,58 @@
+from __future__ import annotations
+from typing import Dict, Any, Optional
+import pandas as pd
+
+from app.equity_extract import extract_equity
+
+def _bh_col(df: pd.DataFrame) -> str:
+    for c in ("Adj Close", "Close", "close", "c"):
+        if c in df.columns: return c
+    # välj första numeriska kolumn om inget av ovan finns
+    for c in df.columns:
+        try:
+            pd.to_numeric(df[c]).iloc[0]
+            return c
+        except Exception:
+            pass
+    raise ValueError("Ingen pris-kolumn funnen (t.ex. Close/Adj Close).")
+
+def evaluate_candidate(df: pd.DataFrame, params: Dict[str, Any]) -> Dict[str, float]:
+    """
+    Kör *samma* backtest som i UI:t, extraherar equity, och räknar ut metrics.
+    - TotalReturn = equity[-1] - 1  (equity normaliseras till start=1)
+    - BuyHold     = P[-1]/P[0] - 1  (samma pris-kolumn konsekvent)
+    """
+    from backtest import run_backtest as RUN
+
+    if df is None or len(df) < 3:
+        raise ValueError("DF saknas eller är för kort för backtest.")
+
+    res = RUN(df, dict(params or {}))
+    eq  = extract_equity(res)          # pd.Series, start=1
+
+    # Buy&Hold på vald kolumn
+    col = _bh_col(df)
+    P = pd.to_numeric(df[col], errors="coerce").dropna()
+    if len(P) < 2:
+        raise ValueError("För få datapunkter i prisserien.")
+
+    bh = float(P.iloc[-1]) / float(P.iloc[0]) - 1.0
+    tr = float(eq.iloc[-1]) - 1.0
+
+    init = float(params.get("initial_equity", 100_000))
+    final_equity = float(eq.iloc[-1]) * init
+
+    return {
+        "TotalReturn": tr,
+        "BuyHold": bh,
+        "FinalEquity": final_equity,
+    }
+
+def pack_profile(ticker: str, flavor_name: str, params: Dict[str, Any],
+                 metrics: Dict[str, float]) -> Dict[str, Any]:
+    return {
+        "name": f"{ticker} – {flavor_name}",
+        "ticker": ticker,
+        "params": dict(params or {}),
+        "metrics": {k: float(v) for k, v in (metrics or {}).items()},
+    }

@@ -365,7 +365,7 @@ st.radio(
 )
 
 # Auto-ladda *_best.json f�r universum
-if st.button("?? Auto-ladda *_best.json f�r universum", use_container_width=True):
+if st.button("?? Auto-ladda *_best.json f�r universum", width='stretch'):
     uni = st.session_state["pf_universe"]
     if not uni:
         st.warning("L�gg in tickers i universum f�rst.", icon="??")
@@ -388,12 +388,12 @@ if profiles_payload:
         }
         for p in profiles_payload
     ])
-    st.dataframe(df_preview, use_container_width=True, hide_index=True, height=min(300, 36 + 28 * max(1, len(df_preview))))
+    st.dataframe(df_preview, width='stretch', hide_index=True, height=min(300, 36 + 28 * max(1, len(df_preview))))
 
 st.divider()
 
 # K�r
-if st.button("?? K�r portf�lj", use_container_width=True):
+if st.button("?? K�r portf�lj", width='stretch'):
     tickers = st.session_state["pf_universe"]
     if not tickers:
         st.error("Universum �r tomt � fyll i minst en ticker.", icon="?")
@@ -456,7 +456,7 @@ if st.button("?? K�r portf�lj", use_container_width=True):
             st.json(pretty, expanded=False)
     with colB:
         if isinstance(trades, pd.DataFrame) and not trades.empty:
-            st.dataframe(trades, use_container_width=True, height=420)
+            st.dataframe(trades, width='stretch', height=420)
 
 # Spara portf�lj
 st.subheader("Spara som (storage/portfolios/�)")
@@ -464,7 +464,7 @@ save_name = st.text_input(
     "Filnamn",
     value=st.session_state.get("pf_loaded_name") or f"{st.session_state['pf_name']}.json"
 )
-if st.button("?? Spara portf�lj", use_container_width=True):
+if st.button("?? Spara portf�lj", width='stretch'):
     payload_out = {
         "name": st.session_state["pf_name"],
         "source": st.session_state["pf_source"],

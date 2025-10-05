@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "KINV B – conservative",
+      "ticker": "KINV B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 27,
+        "rsi_min": 23.317983375663584,
+        "rsi_max": 73.43266893612771,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 161,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 21,
+        "macd_signal": 10,
+        "use_bb_filter": true,
+        "bb_window": 21,
+        "bb_nstd": 1.6477436888245787,
+        "bb_min": 0.16018906160126184,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.0935388784186991,
+        "atr_window": 15,
+        "atr_mult": 2.7902789245942348,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.7678549767070715
+      },
+      "metrics": {
+        "TotalReturn": 0.5052054055525461,
+        "MaxDD": -0.1314473954968105,
+        "SharpeD": 0.7198188943943974,
+        "BuyHold": -0.7408330799635148,
+        "CAGR": 0.08538165408816134
+      }
+    },
+    {
+      "name": "KINV B – balanced",
+      "ticker": "KINV B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 25,
+        "rsi_min": 21.70726054206754,
+        "rsi_max": 76.02491966082555,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 77,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 27,
+        "macd_signal": 8,
+        "use_bb_filter": true,
+        "bb_window": 21,
+        "bb_nstd": 1.7832009629165038,
+        "bb_min": 0.43587426567640497,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.07747642201335833,
+        "atr_window": 12,
+        "atr_mult": 1.6216739547188936,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 3.3286784163715337
+      },
+      "metrics": {
+        "TotalReturn": 0.48793663492067685,
+        "MaxDD": -0.15829923481316344,
+        "SharpeD": 0.6655908561823293,
+        "BuyHold": -0.7408330799635148,
+        "CAGR": 0.08287523891356474
+      }
+    },
+    {
+      "name": "KINV B – aggressive",
+      "ticker": "KINV B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 10,
+        "rsi_min": 27.477199866054782,
+        "rsi_max": 73.56163025921333,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 160,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 11,
+        "macd_slow": 35,
+        "macd_signal": 10,
+        "use_bb_filter": true,
+        "bb_window": 27,
+        "bb_nstd": 1.732308205185638,
+        "bb_min": 0.3114283169643478,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.0799352407978943,
+        "atr_window": 10,
+        "atr_mult": 2.0427777685223174,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.158182138535757
+      },
+      "metrics": {
+        "TotalReturn": 0.5664182117215513,
+        "MaxDD": -0.2133870810478925,
+        "SharpeD": 0.6056362041748398,
+        "BuyHold": -0.7408330799635148,
+        "CAGR": 0.09408494013963975
+      }
+    }
+  ]
+}

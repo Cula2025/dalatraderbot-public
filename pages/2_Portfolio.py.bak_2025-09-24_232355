@@ -20,7 +20,7 @@ st.title("💼 Portfolio (profiler)")
     _BASE = _P(__file__).resolve().parents[1]  # /srv/trader/app
     _LOGO = _BASE / 'assets' / 'logodaladrader.png'
     if _LOGO.exists():
-        st.image(str(_LOGO), use_container_width=True)
+        st.image(str(_LOGO), width='stretch')
         st.markdown('<div style="height:8px"></div>', unsafe_allow_html=True)
 
     st.subheader("Inställningar")
@@ -108,7 +108,7 @@ if not positions or not prices_map:
 
 st.subheader("Valda profiler")
 df_sel = pd.DataFrame(rows)
-st.dataframe(df_sel, use_container_width=True)
+st.dataframe(df_sel, width='stretch')
 
 # 2) Portfölj-ekvitet
 P = to_price_matrix(prices_map)
@@ -157,7 +157,7 @@ for t in tickers:
             params, _, _, _ = load_best_params_for_ticker(t, profiles_dir)
             trades = run_profile_trades(t, params, start)
             if len(trades):
-                st.dataframe(trades, use_container_width=True)
+                st.dataframe(trades, width='stretch')
                 st.download_button(
                     "Ladda ned CSV",
                     trades.to_csv(index=False).encode("utf-8"),

@@ -1,9 +1,8 @@
-[theme]
-primaryColor = "#F2A33A"
-backgroundColor = "#0E1117"
-secondaryBackgroundColor = "#161B22"
-textColor = "#EAEFF2"
-font = "sans serif"
+[server]
+headless = true
+address = "127.0.0.1"
+port = 8501
 
-[client]
-showWidgetKeys = false
+[theme]
+base = "light"
+primaryColor = "#1f6feb"

@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "ERIC B – conservative",
+      "ticker": "ERIC B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 13,
+        "rsi_min": 24.357891141386332,
+        "rsi_max": 84.41832820357509,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 86,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 12,
+        "macd_slow": 20,
+        "macd_signal": 12,
+        "use_bb_filter": false,
+        "bb_window": 27,
+        "bb_nstd": 1.9155428462435617,
+        "bb_min": 0.2585581130418585,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.12845596181323565,
+        "atr_window": 19,
+        "atr_mult": 2.0782604571746477,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.9537665348658155
+      },
+      "metrics": {
+        "TotalReturn": 1.7132323129784823,
+        "MaxDD": -0.1332428550057766,
+        "SharpeD": 1.2187212203540323,
+        "BuyHold": -0.21040630182421227,
+        "CAGR": 0.2213832452886435
+      }
+    },
+    {
+      "name": "ERIC B – balanced",
+      "ticker": "ERIC B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 14,
+        "rsi_min": 31.476078086244744,
+        "rsi_max": 84.5015365521526,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 68,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 12,
+        "macd_slow": 36,
+        "macd_signal": 7,
+        "use_bb_filter": false,
+        "bb_window": 22,
+        "bb_nstd": 1.655660055098482,
+        "bb_min": 0.13261676950362916,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.08375786795390437,
+        "atr_window": 11,
+        "atr_mult": 1.5474844666915284,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.0067764818231946
+      },
+      "metrics": {
+        "TotalReturn": 1.0525672580761407,
+        "MaxDD": -0.19329424162733266,
+        "SharpeD": 1.033843224126947,
+        "BuyHold": -0.21040630182421227,
+        "CAGR": 0.15497033751032996
+      }
+    },
+    {
+      "name": "ERIC B – aggressive",
+      "ticker": "ERIC B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 32.82516689229818,
+        "rsi_max": 79.91145773463548,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 116,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 23,
+        "macd_signal": 6,
+        "use_bb_filter": false,
+        "bb_window": 28,
+        "bb_nstd": 1.80772085100942,
+        "bb_min": 0.31184849817220767,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.08432590542276433,
+        "atr_window": 20,
+        "atr_mult": 1.6165923310029469,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.7699372632195916
+      },
+      "metrics": {
+        "TotalReturn": 1.0384332539660055,
+        "MaxDD": -0.2548941120264775,
+        "SharpeD": 0.8296162903421485,
+        "BuyHold": -0.21040630182421227,
+        "CAGR": 0.15337246840723306
+      }
+    }
+  ]
+}

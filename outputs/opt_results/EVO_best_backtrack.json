@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "EVO – conservative",
+      "ticker": "EVO",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 21,
+        "rsi_min": 30.200556118292564,
+        "rsi_max": 80.67900677405117,
+        "use_trend_filter": true,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 53,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 14,
+        "macd_slow": 27,
+        "macd_signal": 7,
+        "use_bb_filter": true,
+        "bb_window": 21,
+        "bb_nstd": 1.7137472991991816,
+        "bb_min": 0.26041611701978107,
+        "use_stop_loss": true,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.14853088437797257,
+        "atr_window": 14,
+        "atr_mult": 2.8897771103389998,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.070498457893841
+      },
+      "metrics": {
+        "TotalReturn": 1.1168437025796658,
+        "MaxDD": -0.11203866432337439,
+        "SharpeD": 1.3849711540548513,
+        "BuyHold": 0.4500351864883887,
+        "CAGR": 0.16212778465852096
+      }
+    },
+    {
+      "name": "EVO – balanced",
+      "ticker": "EVO",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 21,
+        "rsi_min": 31.780904083555825,
+        "rsi_max": 82.63798094731673,
+        "use_trend_filter": true,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 74,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 24,
+        "macd_signal": 12,
+        "use_bb_filter": true,
+        "bb_window": 24,
+        "bb_nstd": 1.9723732451441367,
+        "bb_min": 0.3391472241165363,
+        "use_stop_loss": true,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.09575816138568802,
+        "atr_window": 20,
+        "atr_mult": 1.7158878305598526,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 1.7811893335003848
+      },
+      "metrics": {
+        "TotalReturn": 1.1168437025796658,
+        "MaxDD": -0.11203866432337439,
+        "SharpeD": 1.3849711540548513,
+        "BuyHold": 0.4500351864883887,
+        "CAGR": 0.16212778465852096
+      }
+    },
+    {
+      "name": "EVO – aggressive",
+      "ticker": "EVO",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 27,
+        "rsi_min": 32.80060019072833,
+        "rsi_max": 57.554599148472626,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 152,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 33,
+        "macd_signal": 11,
+        "use_bb_filter": false,
+        "bb_window": 26,
+        "bb_nstd": 1.7922469242424786,
+        "bb_min": 0.3936513865106571,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.06684871602195426,
+        "atr_window": 18,
+        "atr_mult": 1.7262698743414564,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.1938058992723937
+      },
+      "metrics": {
+        "TotalReturn": 1.6033533306022267,
+        "MaxDD": -0.3932621096196359,
+        "SharpeD": 0.9182295570984778,
+        "BuyHold": 0.4500351864883887,
+        "CAGR": 0.21130855222792122
+      }
+    }
+  ]
+}

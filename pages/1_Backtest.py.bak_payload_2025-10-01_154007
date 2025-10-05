@@ -160,7 +160,7 @@ if files:
             key="bf_profile_idx",
         )
         # Sätt pending och kör om: prof appliceras i PRE-APPLY ovan
-        if st.sidebar.button("✅ Använd i Backtest", use_container_width=True):
+        if st.sidebar.button("✅ Använd i Backtest", width='stretch'):
             st.session_state["_pending_profile"] = profiles[prof_idx]
             st.rerun()
 else:
@@ -241,10 +241,10 @@ with st.expander("Parametrar", expanded=True):
 # Kör backtest
 left, right = st.columns([1,1])
 with left:
-    run_bt = st.button("🚀 Kör backtest", use_container_width=True)
+    run_bt = st.button("🚀 Kör backtest", width='stretch')
 with right:
     pname = st.text_input("Profilnamn att spara", value="TMP från UI")
-    save_btn = st.button("💾 Spara som TMP", use_container_width=True)
+    save_btn = st.button("💾 Spara som TMP", width='stretch')
 
 if run_bt or save_btn:
     ticker = (st.session_state.get("ticker") or "").strip()

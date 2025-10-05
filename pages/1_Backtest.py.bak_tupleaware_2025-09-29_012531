@@ -23,7 +23,7 @@ with st.sidebar:
     _BASE = Path(__file__).resolve().parents[1]
     _LOGO = _BASE / "assets" / "logodaladrader.png"
     if _LOGO.exists():
-        st.image(str(_LOGO), use_container_width=True)
+        st.image(str(_LOGO), width='stretch')
         st.markdown('<div style="height:8px"></div>', unsafe_allow_html=True)
 
 today = dt.date.today()

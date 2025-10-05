@@ -64,7 +64,7 @@ with st.sidebar:
     show_table_rows = st.slider("Rader i tabellen", 50, 5000, 500, 50)
     show_last_n = st.slider("Visa sista N rader", 50, 2000, 300, 50)
 
-    run_btn = st.button("Hämta data", type="primary", use_container_width=True)
+    run_btn = st.button("Hämta data", type="primary", width='stretch')
 
 with st.expander("🧪 Diagnostik", expanded=False):
     st.write({"cwd": os.getcwd(), "sys.executable": sys.executable, "root": str(ROOT)})
@@ -102,7 +102,7 @@ if run_btn:
                                  low=plot_df["Low"], close=plot_df["Close"], showlegend=False), row=1,col=1)
     fig.add_trace(go.Bar(x=plot_df.index, y=plot_df["Volume"], showlegend=False), row=2,col=1)
     fig.update_layout(height=600, xaxis_rangeslider_visible=False, margin=dict(l=10,r=10,t=10,b=10))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
     st.subheader("Data")
-    st.dataframe(df.tail(show_table_rows), use_container_width=True)
+    st.dataframe(df.tail(show_table_rows), width='stretch')

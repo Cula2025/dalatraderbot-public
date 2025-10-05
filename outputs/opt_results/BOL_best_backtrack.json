@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "BOL – conservative",
+      "ticker": "BOL",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 34.29596916603445,
+        "rsi_max": 65.94926308082896,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 108,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 20,
+        "macd_signal": 11,
+        "use_bb_filter": false,
+        "bb_window": 18,
+        "bb_nstd": 2.0297251588245935,
+        "bb_min": 0.39363039607632644,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.13708728169696688,
+        "atr_window": 16,
+        "atr_mult": 1.9962705873669722,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.292768961822407
+      },
+      "metrics": {
+        "TotalReturn": 1.4267211516269054,
+        "MaxDD": -0.21328961869038465,
+        "SharpeD": 0.9193746802878301,
+        "BuyHold": 0.2614525139664805,
+        "CAGR": 0.19437651675420087
+      }
+    },
+    {
+      "name": "BOL – balanced",
+      "ticker": "BOL",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 13,
+        "rsi_min": 33.39063201766939,
+        "rsi_max": 63.047669971848514,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 139,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 36,
+        "macd_signal": 12,
+        "use_bb_filter": false,
+        "bb_window": 16,
+        "bb_nstd": 2.07367793998017,
+        "bb_min": 0.32294021308991333,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.09903592749942688,
+        "atr_window": 16,
+        "atr_mult": 2.633868755158994,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.8674528985870538
+      },
+      "metrics": {
+        "TotalReturn": 1.0548475208949193,
+        "MaxDD": -0.23797664668345342,
+        "SharpeD": 0.7685091270342064,
+        "BuyHold": 0.2614525139664805,
+        "CAGR": 0.15522729961369053
+      }
+    },
+    {
+      "name": "BOL – aggressive",
+      "ticker": "BOL",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 34.6508564018162,
+        "rsi_max": 73.45981920537176,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 56,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 12,
+        "macd_slow": 27,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 18,
+        "bb_nstd": 2.4233688861331157,
+        "bb_min": 0.4066403126352752,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.14661062444545542,
+        "atr_window": 14,
+        "atr_mult": 2.636590279062219,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.6083652405328395
+      },
+      "metrics": {
+        "TotalReturn": 1.9405209904145413,
+        "MaxDD": -0.20986066928223313,
+        "SharpeD": 1.00827562033606,
+        "BuyHold": 0.2614525139664805,
+        "CAGR": 0.24122889138737014
+      }
+    }
+  ]
+}

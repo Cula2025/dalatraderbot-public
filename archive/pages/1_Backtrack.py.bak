@@ -287,7 +287,7 @@ with st.sidebar:
     x1.number_input("Max exponering %", 1.0, 100.0, key="max_exp")
     x2.number_input("% per affär", 1.0, 100.0, key="per_trade_pct")
 
-run_btn = st.sidebar.button("🚀 Kör backtest (manuellt)", use_container_width=True)
+run_btn = st.sidebar.button("🚀 Kör backtest (manuellt)", width='stretch')
 
 left, right = st.columns([2, 3], gap="large")
 
@@ -406,7 +406,7 @@ fast_grid = c1.text_input("Fast EMA (komma-separerat)", "10,15,20")
 slow_grid = c2.text_input("Långsam EMA (komma-separerat)", "100,150,200")
 trend_grid = c3.text_input("Trendfilter EMA (0=av, komma-separerat)", "0,200")
 
-opt_btn = st.button("🎯 Kör MA-optimering per aktie", use_container_width=True)
+opt_btn = st.button("🎯 Kör MA-optimering per aktie", width='stretch')
 
 def _parse_list_int(s: str) -> List[int]:
     out: List[int] = []
@@ -511,7 +511,7 @@ if opt_btn:
 
             df_res = pd.DataFrame(rows)
             st.subheader("Resultat – MA-grid")
-            st.dataframe(df_res, use_container_width=True)
+            st.dataframe(df_res, width='stretch')
 
             st.subheader("Bästa kombination per ticker")
             best_rows = []
@@ -526,7 +526,7 @@ if opt_btn:
                     "TotalReturn%": round(best["ret"] * 100, 2),
                 })
             df_best = pd.DataFrame(best_rows)
-            st.dataframe(df_best, use_container_width=True)
+            st.dataframe(df_best, width='stretch')
 
             # Export
             with io.BytesIO() as buf:
@@ -539,7 +539,7 @@ if opt_btn:
                 sel = st.selectbox("Ticker", list(best_by_ticker.keys()))
                 if sel:
                     best = best_by_ticker[sel]
-                    if st.button("✅ Använd bästa i kontrollerna", use_container_width=True):
+                    if st.button("✅ Använd bästa i kontrollerna", width='stretch'):
                         st.session_state["strategy"] = "ma_cross"
                         st.session_state["ma_fast"] = int(best["fast"])
                         st.session_state["ma_slow"] = int(best["slow"])
@@ -639,15 +639,15 @@ with colA:
 with colB:
     st.caption("Presets (minsta indikatoruppsättning per papper):")
     pcol1, pcol2 = st.columns(2)
-    if pcol1.button("🔒 ABB preset (MA 10/100, ingen trend)", use_container_width=True):
+    if pcol1.button("🔒 ABB preset (MA 10/100, ingen trend)", width='stretch'):
         _apply_preset(PRESETS["ABB"])
-    if pcol2.button("🔒 VOLV B preset (RSI 10 → 35/75 + EMA150)", use_container_width=True):
+    if pcol2.button("🔒 VOLV B preset (RSI 10 → 35/75 + EMA150)", width='stretch'):
         _apply_preset(PRESETS["VOLV B"])
 
 # Lås nuvarande kontroller till profilfil
 save_col1, save_col2 = st.columns([2, 3])
 with save_col1:
-    if st.button("💾 Lås NUVARANDE kontroller till profil", use_container_width=True):
+    if st.button("💾 Lås NUVARANDE kontroller till profil", width='stretch'):
         try:
             fp = _save_locked_profile(lock_ticker)
             st.success(f"Sparad: {fp}")

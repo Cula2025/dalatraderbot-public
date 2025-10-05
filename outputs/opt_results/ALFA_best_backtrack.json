@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "ALFA – conservative",
+      "ticker": "ALFA",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 10,
+        "rsi_min": 18.867027491404198,
+        "rsi_max": 83.37195351197907,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 161,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 29,
+        "macd_signal": 7,
+        "use_bb_filter": false,
+        "bb_window": 15,
+        "bb_nstd": 2.150432643619045,
+        "bb_min": 0.4240677696159071,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.146423446591732,
+        "atr_window": 20,
+        "atr_mult": 2.8459967932470622,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 3.194829616680713
+      },
+      "metrics": {
+        "TotalReturn": 2.0047128973330186,
+        "MaxDD": -0.17774897833468417,
+        "SharpeD": 1.2753268603193213,
+        "BuyHold": 1.1375372393247267,
+        "CAGR": 0.2466110131412791
+      }
+    },
+    {
+      "name": "ALFA – balanced",
+      "ticker": "ALFA",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 11,
+        "rsi_min": 17.5992187830256,
+        "rsi_max": 83.53159675321976,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 100,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 26,
+        "macd_signal": 6,
+        "use_bb_filter": true,
+        "bb_window": 25,
+        "bb_nstd": 2.122696085230168,
+        "bb_min": 0.26590350474506785,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.10370822151986653,
+        "atr_window": 19,
+        "atr_mult": 2.6096533003880094,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 1.937486132692962
+      },
+      "metrics": {
+        "TotalReturn": 1.1886654006530843,
+        "MaxDD": -0.1058620689655172,
+        "SharpeD": 1.229784520320391,
+        "BuyHold": 1.1375372393247267,
+        "CAGR": 0.16992269872014498
+      }
+    },
+    {
+      "name": "ALFA – aggressive",
+      "ticker": "ALFA",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 9,
+        "rsi_min": 22.080965314073655,
+        "rsi_max": 82.5675652434681,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 104,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 30,
+        "macd_signal": 6,
+        "use_bb_filter": false,
+        "bb_window": 14,
+        "bb_nstd": 2.128197494889161,
+        "bb_min": 0.10960150053297313,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.12475275575565355,
+        "atr_window": 13,
+        "atr_mult": 2.8298379728078595,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.2868708016284227
+      },
+      "metrics": {
+        "TotalReturn": 1.7979523146169436,
+        "MaxDD": -0.2554266211115376,
+        "SharpeD": 1.1283046345990204,
+        "BuyHold": 1.1375372393247267,
+        "CAGR": 0.2289306757076246
+      }
+    }
+  ]
+}

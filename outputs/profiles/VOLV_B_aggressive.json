@@ -1,0 +1,23 @@
+{
+  "name": "VOLV B – aggressive",
+  "ticker": "VOLV B",
+  "params": {
+    "strategy": "RSI",
+    "use_rsi_filter": true,
+    "rsi_window": 9,
+    "rsi_min": 25.6,
+    "rsi_max": 71.0,
+    "breakout_lookback": 47,
+    "exit_lookback": 29,
+    "use_trend_filter": true,
+    "trend_ma_type": "EMA",
+    "trend_ma_window": 100,
+    "per_trade_pct": 100.0,
+    "max_exposure_pct": 100.0,
+    "max_positions": 1,
+    "cost_bps": 0.0,
+    "slip_bps": 0.0,
+    "cash_rate_apy": 0.0
+  },
+  "notes": "Aggressiv RSI+breakout med EMA(100) trend-gate. Den här matchar profilen du fångade tidigare."
+}

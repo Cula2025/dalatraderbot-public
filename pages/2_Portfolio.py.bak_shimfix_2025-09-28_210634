@@ -53,7 +53,7 @@ with st.sidebar:
     _BASE = Path(__file__).resolve().parents[1]
     _LOGO = _BASE / "assets" / "logodaladrader.png"
     if _LOGO.exists():
-        st.image(str(_LOGO), use_container_width=True)
+        st.image(str(_LOGO), width='stretch')
         st.markdown('<div style="height:8px"></div>', unsafe_allow_html=True)
 
     st.subheader("Inställningar")
@@ -186,7 +186,7 @@ with tab1:
         .configure(background="#0E1117")
         .configure_axis(labelColor="#EAEFF2", titleColor="#EAEFF2", gridColor="#27374A")
     )
-    st.altair_chart(ch, use_container_width=True)
+    st.altair_chart(ch, width='stretch')
     st.caption("Vikter sluts med 1 dags lag, full återinvestering inom angivna kap-begränsningar.")
 
     c1, c2, c3 = st.columns(3)
@@ -202,10 +202,10 @@ with tab1:
 with tab2:
     st.subheader("Valda profiler")
     df_sel = pd.DataFrame(rows)
-    st.dataframe(df_sel, use_container_width=True)
+    st.dataframe(df_sel, width='stretch')
     st.markdown("**Senaste vikter (topp 15):**")
     last_w = W.iloc[-1].sort_values(ascending=False).head(15)
-    st.dataframe(last_w.to_frame("Vikt").style.format("{:.2%}"), use_container_width=True)
+    st.dataframe(last_w.to_frame("Vikt").style.format("{:.2%}"), width='stretch')
 
 with tab3:
     st.subheader("Transaktioner per aktie")
@@ -215,7 +215,7 @@ with tab3:
                 params, _, _, _ = load_best_params_for_ticker(t, profiles_dir)
                 trades = run_profile_trades(t, params, start)
                 if len(trades):
-                    st.dataframe(trades, use_container_width=True)
+                    st.dataframe(trades, width='stretch')
                     st.download_button(
                         "Ladda ned CSV",
                         trades.to_csv(index=False).encode("utf-8"),

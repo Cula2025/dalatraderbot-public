@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "SINCH – conservative",
+      "ticker": "SINCH",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 17,
+        "rsi_min": 28.06168415965677,
+        "rsi_max": 80.5968978696613,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 84,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 12,
+        "macd_slow": 20,
+        "macd_signal": 12,
+        "use_bb_filter": false,
+        "bb_window": 26,
+        "bb_nstd": 1.6661879789942078,
+        "bb_min": 0.20773743985703655,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.06453438584803586,
+        "atr_window": 11,
+        "atr_mult": 2.0663041000452083,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.994882131691555
+      },
+      "metrics": {
+        "TotalReturn": 5.285182235130086,
+        "MaxDD": -0.3428066923881724,
+        "SharpeD": 1.0556366472871346,
+        "BuyHold": -0.5677506775067751,
+        "CAGR": 0.44526744165745935
+      }
+    },
+    {
+      "name": "SINCH – balanced",
+      "ticker": "SINCH",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 27,
+        "rsi_min": 30.95017786468378,
+        "rsi_max": 73.53682786947424,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 64,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 33,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 28,
+        "bb_nstd": 2.275553194482536,
+        "bb_min": 0.1886788001661094,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.1373411314418897,
+        "atr_window": 11,
+        "atr_mult": 1.9922106436692526,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.22898888788049
+      },
+      "metrics": {
+        "TotalReturn": 4.435659779210588,
+        "MaxDD": -0.4313431871521479,
+        "SharpeD": 0.9901779412079637,
+        "BuyHold": -0.5677506775067751,
+        "CAGR": 0.40382383287497325
+      }
+    },
+    {
+      "name": "SINCH – aggressive",
+      "ticker": "SINCH",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 14,
+        "rsi_min": 28.05507413923658,
+        "rsi_max": 83.34642409507217,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 72,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 11,
+        "macd_slow": 25,
+        "macd_signal": 10,
+        "use_bb_filter": false,
+        "bb_window": 21,
+        "bb_nstd": 1.9627302143888943,
+        "bb_min": 0.458620770082527,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.1271711411945301,
+        "atr_window": 15,
+        "atr_mult": 2.4795908965243054,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.2419862572145908
+      },
+      "metrics": {
+        "TotalReturn": 4.426913837938985,
+        "MaxDD": -0.46327683666481456,
+        "SharpeD": 0.9702194941866932,
+        "BuyHold": -0.5677506775067751,
+        "CAGR": 0.4033709874088909
+      }
+    }
+  ]
+}

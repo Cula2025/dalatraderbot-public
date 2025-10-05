@@ -1,0 +1,147 @@
+import json, traceback
+from pathlib import Path
+from datetime import date
+import pandas as pd
+import streamlit as st
+
+st.set_page_config(page_title="Backtest MIN", page_icon="🧪", layout="wide")
+st.title("🧪 Backtest MIN")
+st.caption("Lättvikts-backtest som alltid försöker: get_ohlcv → btwrap.run_backtest → fallback backtest.run_backtest(df,p).")
+
+# --- Safe imports ---
+GET = None
+RUN_WRAP = None
+RUN_RAW  = None
+try:
+    from app.data_providers import get_ohlcv as GET
+except Exception as e:
+    st.error(f"Kunde inte importera data loader (app.data_providers.get_ohlcv): {type(e).__name__}: {e}")
+
+try:
+    from app.btwrap import run_backtest as RUN_WRAP   # dict med keys summary/equity/trades
+except Exception:
+    RUN_WRAP = None
+
+try:
+    from backtest import run_backtest as RUN_RAW      # def run_backtest(df=None, p=None)
+except Exception:
+    RUN_RAW = None
+
+# --- Profilläsare (valfri) ---
+base = Path("/srv/trader/app/profiles") if Path("/srv/trader/app/profiles").exists() else Path("profiles")
+pro_files = sorted([p for p in base.glob("*.json")], key=lambda x: x.stat().st_mtime, reverse=True)
+
+with st.sidebar:
+    st.header("Ladda profil")
+    sel_file = st.selectbox("Profilfil", pro_files, format_func=lambda p: p.name if isinstance(p, Path) else str(p)) if pro_files else None
+    profs = []
+    if sel_file and sel_file.exists():
+        try:
+            data = json.loads(sel_file.read_text(encoding="utf-8"))
+            profs = data.get("profiles", [])
+        except Exception as e:
+            st.warning(f"Kunde inte läsa {sel_file.name}: {e}")
+    sel_prof = st.selectbox("Välj profil i filen", profs, format_func=lambda x: x.get("name","–")) if profs else None
+    use_prof = st.checkbox("Använd vald profil", value=bool(sel_prof))
+
+# --- Form / parametrar ---
+colA, colB, colC = st.columns([1,1,1])
+
+if use_prof and sel_prof:
+    default_ticker = sel_prof.get("ticker","")
+    p0 = dict(sel_prof.get("params", {}))
+else:
+    default_ticker = ""
+    p0 = {}
+
+with colA:
+    ticker = st.text_input("Ticker", value=default_ticker)
+with colB:
+    fd = st.text_input("Från (YYYY-MM-DD)", value=str(p0.get("from_date") or "2020-10-01"))
+with colC:
+    td = st.text_input("Till (YYYY-MM-DD)", value=str(p0.get("to_date") or date.today().isoformat()))
+
+# Några nyckelparametrar (håll det minimalt men kompatibelt)
+c1, c2, c3, c4 = st.columns(4)
+with c1:
+    p0["rsi_window"] = st.number_input("RSI-fönster", 5, 50, int(p0.get("rsi_window", 14)))
+with c2:
+    p0["breakout_lookback"] = st.number_input("Breakout lookback", 5, 250, int(p0.get("breakout_lookback", 55)))
+with c3:
+    p0["exit_lookback"] = st.number_input("Exit lookback", 5, 250, int(p0.get("exit_lookback", 20)))
+with c4:
+    p0["macd_signal"] = st.number_input("MACD signal", 5, 20, int(p0.get("macd_signal", 9)))
+
+# alltid inkludera datum i param-dict
+p0["from_date"] = fd
+p0["to_date"]   = td
+
+st.markdown("---")
+go = st.button("🚀 Kör backtest", width='stretch')
+
+msg = st.empty()
+out_area = st.empty()
+
+def _run_bt_with_fallback(tick: str, params: dict):
+    """Försök i ordning: (A) btwrap med p={...}, (B) raw backtest med df,p."""
+    # Först: hämta data
+    if GET is None:
+        raise RuntimeError("Ingen dataload-funktion (GET) tillgänglig.")
+    try:
+        df = GET(tick, start=params.get("from_date"), end=params.get("to_date"))
+    except TypeError:
+        df = GET(tick, params.get("from_date"), params.get("to_date"))
+    if df is None or (hasattr(df, "__len__") and len(df) == 0):
+        raise ValueError("Ingen data returnerades (df=None/empty).")
+
+    # A) btwrap
+    if RUN_WRAP is not None:
+        try:
+            res = RUN_WRAP(p={"ticker": tick, "params": dict(params)})
+            if isinstance(res, dict) and ("summary" in res or "equity" in res):
+                return res
+        except Exception:
+            # prova signaturvariant
+            try:
+                res = RUN_WRAP(tick, dict(params))
+                if isinstance(res, dict) and ("summary" in res or "equity" in res):
+                    return res
+            except Exception:
+                pass  # fall through
+
+    # B) raw backtest
+    if RUN_RAW is not None:
+        try:
+            res = RUN_RAW(df=df, p=dict(params))
+            if isinstance(res, dict):
+                return res
+        except TypeError:
+            res = RUN_RAW(df, dict(params))
+            if isinstance(res, dict):
+                return res
+
+    raise RuntimeError("Kunde inte köra backtest via varken btwrap eller raw backtest.")
+
+if go:
+    if not ticker.strip():
+        msg.warning("Ange ticker.")
+    else:
+        try:
+            res = _run_bt_with_fallback(ticker.strip(), p0)
+            summ = res.get("summary", {})
+            eq   = res.get("equity")
+            st.subheader("Resultat")
+            if summ:
+                st.json(summ)
+            else:
+                st.info("Inget summary i resultatet.")
+            if isinstance(eq, pd.DataFrame) and not eq.empty:
+                st.markdown("**Equity (sista 10 rader)**")
+                st.dataframe(eq.tail(10), width='stretch')
+            else:
+                st.info("Ingen equity-tabell i resultatet.")
+        except Exception as e:
+            st.error(f"Körning misslyckades: {type(e).__name__}: {e}")
+            st.code(traceback.format_exc())
+else:
+    st.info("Inget resultat att visa.")

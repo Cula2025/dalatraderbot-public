@@ -95,7 +95,7 @@ with st.sidebar.expander("📁 Ladda profil", expanded=True):
                 key="prof_sel_idx"
             )
 
-            if st.button("✅ Använd i Backtest", key="prof_apply_btn", use_container_width=True):
+            if st.button("✅ Använd i Backtest", key="prof_apply_btn", width='stretch'):
                 # Skicka in vald profil till PRE-APPLY via pending state
                 st.session_state["_pending_profile"] = profs[prof_idx]
                 st.rerun()
@@ -462,7 +462,7 @@ for k, v in DEFAULTS.items():
 # LEGACY_UI #             format_func=lambda i: f"{profiles[i]['ticker'] or ''} – {profiles[i]['name']}",
 # LEGACY_UI #             key="back_prof_idx",
 # LEGACY_UI #         )
-# LEGACY_UI #         if st.sidebar.button("Använd vald profil", type="primary", use_container_width=True):
+# LEGACY_UI #         if st.sidebar.button("Använd vald profil", type="primary", width='stretch'):
 # LEGACY_UI #             _apply_profile_to_state(profiles[prof_idx])
 # LEGACY_UI #             st.sidebar.success("Profil applicerad till parametrarna.")
 # LEGACY_UI # else:
@@ -562,7 +562,7 @@ for k, v in DEFAULTS.items():
 # LEGACY_UI #     return {"TotalReturn": total, "CAGR": cagr, "SharpeD": sharpe_d, "MaxDD": dd}
 # LEGACY_UI # 
 # LEGACY_UI # col_run, col_save = st.columns([1,1])
-# LEGACY_UI # if col_run.button("Kör backtest", type="primary", use_container_width=True):
+# LEGACY_UI # if col_run.button("Kör backtest", type="primary", width='stretch'):
 # LEGACY_UI #     ticker = _normalize_ticker(st.session_state.get("ticker", ""))
 # LEGACY_UI #     params = _collect_params_from_state()
 # LEGACY_UI #     start = _coerce_date(st.session_state.get("from_date", DEFAULTS["from_date"]))
@@ -618,7 +618,7 @@ try:
     col_save
 except NameError:
     col_run, col_save = st.columns([3,1])
-if col_save.button("Spara som TMP", use_container_width=True):
+if col_save.button("Spara som TMP", width='stretch'):
     try:
         t = payload["profiles"][0]["ticker"]
         base = t.replace(".ST", "").replace(" ", "_")

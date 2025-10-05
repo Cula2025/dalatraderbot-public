@@ -169,7 +169,7 @@ def show_result_block(title: str, res: Dict[str, Any]):
     tr = res.get("trades")
     if isinstance(tr, pd.DataFrame) and not tr.empty:
         keep = [c for c in ["EntryTime","EntryPrice","ExitTime","ExitPrice","PnL","reason"] if c in tr.columns]
-        st.dataframe(tr[keep].tail(100), use_container_width=True)
+        st.dataframe(tr[keep].tail(100), width='stretch')
 
 # =========================
 # SIDKONFIG & STATE-INIT
@@ -318,7 +318,7 @@ if st.button("Hämta data", type="primary"):
         df = fetch_df()
         STATE["df"] = df
         st.success(f"Läste {len(df)} rader för {ticker}.")
-        st.dataframe(df.tail(10), use_container_width=True)
+        st.dataframe(df.tail(10), width='stretch')
     except Exception as e:
         st.error(f"Kunde inte ladda/städa data: {e}")
 

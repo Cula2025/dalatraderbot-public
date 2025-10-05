@@ -236,7 +236,7 @@ else:
     try:
         from app.data_providers import get_ohlcv
         tkr = st.sidebar.text_input("Borsdata ticker", value=ticker_for_save)
-        if st.sidebar.button("Download data", use_container_width=True):
+        if st.sidebar.button("Download data", width='stretch'):
             raw = get_ohlcv(tkr, start=from_date.isoformat(), end=to_date.isoformat(), source="borsdata")
             # raw ska vara en DataFrame â€“ anvÃ¤nd den direkt
             if raw is None:
@@ -264,7 +264,7 @@ st.sidebar.header("Costs")
 cost_bps = float(st.sidebar.number_input("Cost (bps)", min_value=0.0, max_value=200.0, value=0.0, step=0.5))
 slip_bps = int(st.sidebar.number_input("Slippage (bps)", min_value=0, max_value=200, value=0, step=1))
 
-run = st.button("Run optimizer", use_container_width=True)
+run = st.button("Run optimizer", width='stretch')
 
 if not run:
     st.info("Select/Fetch CSV and click Run optimizer.")
@@ -337,7 +337,7 @@ progress.progress(100, text="Done.")
 
 dfres = pd.DataFrame(rows).sort_values("Score", ascending=False).reset_index(drop=True)
 st.subheader("Top results")
-st.dataframe(dfres.head(25), use_container_width=True)
+st.dataframe(dfres.head(25), width='stretch')
 
 # ---- Save best profile with requested name ----
 tkr = (ticker_for_save or "TICKER").strip()

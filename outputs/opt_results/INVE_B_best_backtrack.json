@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "INVE B – conservative",
+      "ticker": "INVE B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 9,
+        "rsi_min": 33.43648382519683,
+        "rsi_max": 83.72937669721324,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 101,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 11,
+        "macd_slow": 22,
+        "macd_signal": 11,
+        "use_bb_filter": true,
+        "bb_window": 19,
+        "bb_nstd": 2.468879345040148,
+        "bb_min": 0.48209614880148755,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.1376767979915759,
+        "atr_window": 20,
+        "atr_mult": 2.9805119321122806,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.58521826136184
+      },
+      "metrics": {
+        "TotalReturn": 0.9518721992156025,
+        "MaxDD": -0.13895612400037327,
+        "SharpeD": 1.1203790053009453,
+        "BuyHold": 1.0095541401273884,
+        "CAGR": 0.14338854677078494
+      }
+    },
+    {
+      "name": "INVE B – balanced",
+      "ticker": "INVE B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 9,
+        "rsi_min": 31.298408292675287,
+        "rsi_max": 84.44032650894876,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 93,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 11,
+        "macd_slow": 22,
+        "macd_signal": 12,
+        "use_bb_filter": false,
+        "bb_window": 16,
+        "bb_nstd": 1.5636251248711628,
+        "bb_min": 0.3617236424172685,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.05008944421642334,
+        "atr_window": 20,
+        "atr_mult": 2.4072028518857644,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.594225383467477
+      },
+      "metrics": {
+        "TotalReturn": 1.408545843889676,
+        "MaxDD": -0.15657200309263886,
+        "SharpeD": 1.1742570795464125,
+        "BuyHold": 1.0095541401273884,
+        "CAGR": 0.19257884196072483
+      }
+    },
+    {
+      "name": "INVE B – aggressive",
+      "ticker": "INVE B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 9,
+        "rsi_min": 22.89239230721326,
+        "rsi_max": 55.18248145289627,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 159,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 25,
+        "macd_signal": 8,
+        "use_bb_filter": false,
+        "bb_window": 21,
+        "bb_nstd": 2.4939037621463336,
+        "bb_min": 0.331585068741561,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.14034444473181112,
+        "atr_window": 10,
+        "atr_mult": 2.398807864112289,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.100106970620713
+      },
+      "metrics": {
+        "TotalReturn": 0.6801733904772465,
+        "MaxDD": -0.16227555234055124,
+        "SharpeD": 0.8989724781437921,
+        "BuyHold": 1.0095541401273884,
+        "CAGR": 0.10956097018294586
+      }
+    }
+  ]
+}

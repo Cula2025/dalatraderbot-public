@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "SSAB – conservative",
+      "ticker": "SSAB",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 29,
+        "rsi_min": 31.67850892983794,
+        "rsi_max": 63.19781678698003,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 170,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 35,
+        "macd_signal": 11,
+        "use_bb_filter": false,
+        "bb_window": 22,
+        "bb_nstd": 1.6704365059214337,
+        "bb_min": 0.1918488264939629,
+        "use_stop_loss": true,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.10747814958485133,
+        "atr_window": 20,
+        "atr_mult": 2.731191936144439,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.197235283729678
+      },
+      "metrics": {
+        "TotalReturn": 2.857347272838061,
+        "MaxDD": -0.21709567984579503,
+        "SharpeD": 1.2843934690665075,
+        "BuyHold": 0.8895833333333334,
+        "CAGR": 0.3107843983601186
+      }
+    },
+    {
+      "name": "SSAB – balanced",
+      "ticker": "SSAB",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 29,
+        "rsi_min": 33.96536836600016,
+        "rsi_max": 67.73175796192014,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 123,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 35,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 20,
+        "bb_nstd": 2.429516965172885,
+        "bb_min": 0.40809992723456034,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.06403852410649999,
+        "atr_window": 10,
+        "atr_mult": 1.5787811236750442,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.2025595674637906
+      },
+      "metrics": {
+        "TotalReturn": 3.4303300376018147,
+        "MaxDD": -0.18880716322613988,
+        "SharpeD": 1.4166602100072934,
+        "BuyHold": 0.8895833333333334,
+        "CAGR": 0.3476862319227243
+      }
+    },
+    {
+      "name": "SSAB – aggressive",
+      "ticker": "SSAB",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 18,
+        "rsi_min": 27.355074991618864,
+        "rsi_max": 75.9201964914414,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 134,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 32,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 23,
+        "bb_nstd": 1.7763203267761534,
+        "bb_min": 0.11823070607327098,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.11539119927293552,
+        "atr_window": 10,
+        "atr_mult": 2.8490075850043426,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.6759078627876605
+      },
+      "metrics": {
+        "TotalReturn": 2.55736079237862,
+        "MaxDD": -0.23010370848156614,
+        "SharpeD": 1.1758358073127397,
+        "BuyHold": 0.8895833333333334,
+        "CAGR": 0.2896821684765021
+      }
+    }
+  ]
+}

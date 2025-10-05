@@ -74,7 +74,7 @@ with st.sidebar.expander("Ladda profil", expanded=True):
 
     prof_idx = st.selectbox("Välj profil", options=range(len(profiles)) if profiles else [], format_func=_label, key="__prof_idx__")
 
-    if st.button("✅ Använd i Backtest", use_container_width=True):
+    if st.button("✅ Använd i Backtest", width='stretch'):
         if profiles:
             _apply_profile_to_session(profiles[prof_idx])
             st.rerun()

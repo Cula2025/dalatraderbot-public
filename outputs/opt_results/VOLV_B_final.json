@@ -1,0 +1,41 @@
+{
+  "profiles": [
+    {
+      "name": "VOLV B – final",
+      "ticker": "VOLV B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 14,
+        "rsi_min": 25.0,
+        "rsi_max": 60.0,
+        "use_trend_filter": true,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 100,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 12,
+        "macd_slow": 26,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 20,
+        "bb_nstd": 2.0,
+        "bb_min": 0.2,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.08,
+        "atr_window": 14,
+        "atr_mult": 2.0,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.0
+      },
+      "metrics": {
+        "TotalReturn": 0.06643320578408507,
+        "MaxDD": -0.14911240812021387,
+        "SharpeD": 0.1737764932303427,
+        "BuyHold": 0.6122931442080379,
+        "CAGR": 0.012955946765315307
+      }
+    }
+  ]
+}

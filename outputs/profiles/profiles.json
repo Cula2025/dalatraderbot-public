@@ -1,0 +1,26 @@
+{
+  "profiles": [
+    {
+      "name": "Standard Breakout (RSI)",
+      "source": "borsdata",
+      "ticker": "ABB",
+      "start": "2024-09-06",
+      "end": "2025-09-10",
+      "strategy": "breakout",
+      "params": {
+        "use_trend_filter": true,
+        "trend_ma_window": 100,
+        "trend_ma_type": "EMA",
+        "use_rsi_filter": true,
+        "rsi_window": 14,
+        "rsi_min": 30.0,
+        "rsi_max": 80.0,
+        "stop_loss_pct": 0.02,
+        "take_profit_pct": 0.2,
+        "trailing_stop_pct": 0.1,
+        "breakout_lookback": 5,
+        "exit_lookback": 3
+      }
+    }
+  ]
+}

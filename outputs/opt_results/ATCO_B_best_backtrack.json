@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "ATCO B – conservative",
+      "ticker": "ATCO B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 14,
+        "rsi_min": 30.618913195921106,
+        "rsi_max": 68.87522606719843,
+        "use_trend_filter": true,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 81,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 10,
+        "macd_slow": 20,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 23,
+        "bb_nstd": 2.057292227539089,
+        "bb_min": 0.17519121746558777,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.08931449152697597,
+        "atr_window": 16,
+        "atr_mult": 1.8129388781593399,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.8879233091469123
+      },
+      "metrics": {
+        "TotalReturn": 0.5553821890518231,
+        "MaxDD": -0.08967543966525127,
+        "SharpeD": 1.0208200640335,
+        "BuyHold": 0.5675824175824176,
+        "CAGR": 0.09253617244422419
+      }
+    },
+    {
+      "name": "ATCO B – balanced",
+      "ticker": "ATCO B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 19,
+        "rsi_min": 28.74460149163705,
+        "rsi_max": 55.801651172357786,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 114,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 29,
+        "macd_signal": 6,
+        "use_bb_filter": false,
+        "bb_window": 26,
+        "bb_nstd": 2.294366314523806,
+        "bb_min": 0.17450334377447435,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.07210715012311063,
+        "atr_window": 14,
+        "atr_mult": 1.7760103031542855,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 1.645648035779318
+      },
+      "metrics": {
+        "TotalReturn": 0.5819156423945764,
+        "MaxDD": -0.18148540149983916,
+        "SharpeD": 0.6630284501965049,
+        "BuyHold": 0.5675824175824176,
+        "CAGR": 0.09624514736631684
+      }
+    },
+    {
+      "name": "ATCO B – aggressive",
+      "ticker": "ATCO B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 14,
+        "rsi_min": 30.77875462983421,
+        "rsi_max": 75.19653089750553,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 180,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 33,
+        "macd_signal": 7,
+        "use_bb_filter": false,
+        "bb_window": 24,
+        "bb_nstd": 2.2408797543439753,
+        "bb_min": 0.20788732684070568,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.14520520347987692,
+        "atr_window": 19,
+        "atr_mult": 2.5006444972585053,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.356737079851266
+      },
+      "metrics": {
+        "TotalReturn": 0.8714470285797038,
+        "MaxDD": -0.30831141784919847,
+        "SharpeD": 0.7810667910144512,
+        "BuyHold": 0.5675824175824176,
+        "CAGR": 0.13378982213896817
+      }
+    }
+  ]
+}

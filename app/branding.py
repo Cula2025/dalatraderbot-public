@@ -39,7 +39,7 @@ html, body, [class*="st-"] { font-family: Inter, system-ui, -apple-system, Segoe
     try:
         with st.sidebar:
             if logo.exists():
-                st.image(str(logo), use_container_width=True)
+                st.image(str(logo), width='stretch')
                 st.markdown('<div style="height:8px"></div>', unsafe_allow_html=True)
     except Exception:
         pass

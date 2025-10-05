@@ -1,0 +1,81 @@
+{
+  "profiles": [
+    {
+      "name": "Generic Breakout",
+      "source": "borsdata",
+      "ticker": "",
+      "start": "2019-01-01",
+      "end": "2025-09-09",
+      "strategy": "breakout",
+      "params": {
+        "breakout_lookback": 20,
+        "exit_lookback": 10,
+        "use_trend_filter": true,
+        "trend_ma_window": 100,
+        "trend_ma_type": "SMA",
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.20,
+        "trailing_stop_pct": 0.10,
+        "cooldown_days_after_sl": 5
+      }
+    },
+    {
+      "name": "VOLV B – Breakout TF",
+      "source": "borsdata",
+      "ticker": "VOLV B",
+      "start": "2019-01-01",
+      "end": "2025-09-09",
+      "strategy": "breakout",
+      "params": {
+        "breakout_lookback": 55,
+        "exit_lookback": 15,
+        "use_trend_filter": true,
+        "trend_ma_window": 150,
+        "trend_ma_type": "SMA",
+        "stop_loss_pct": 0.07,
+        "take_profit_pct": 0.18,
+        "trailing_stop_pct": 0.08,
+        "cooldown_days_after_sl": 10
+      }
+    },
+    {
+      "name": "ABB – MA Cross",
+      "source": "borsdata",
+      "ticker": "ABB",
+      "start": "2019-01-01",
+      "end": "2025-09-09",
+      "strategy": "ma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 50,
+        "use_trend_filter": true,
+        "trend_ma_window": 200,
+        "trend_ma_type": "EMA",
+        "stop_loss_pct": 0.08,
+        "take_profit_pct": 0.25,
+        "trailing_stop_pct": 0.12,
+        "cooldown_days_after_sl": 7
+      }
+    },
+    {
+      "name": "ERIC B – Breakout kortare",
+      "source": "borsdata",
+      "ticker": "ERIC B",
+      "start": "2019-01-01",
+      "end": "2025-09-09",
+      "strategy": "breakout",
+      "params": {
+        "breakout_lookback": 20,
+        "exit_lookback": 8,
+        "use_trend_filter": true,
+        "trend_ma_window": 100,
+        "trend_ma_type": "SMA",
+        "stop_loss_pct": 0.10,
+        "take_profit_pct": 0.20,
+        "trailing_stop_pct": 0.10,
+        "cooldown_days_after_sl": 5
+      }
+    }
+  ]
+}
+

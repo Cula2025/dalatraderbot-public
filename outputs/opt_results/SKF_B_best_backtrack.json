@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "SKF B – conservative",
+      "ticker": "SKF B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 9,
+        "rsi_min": 17.239821608642274,
+        "rsi_max": 56.49011030473667,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 169,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 22,
+        "macd_signal": 12,
+        "use_bb_filter": true,
+        "bb_window": 24,
+        "bb_nstd": 2.1613349782439237,
+        "bb_min": 0.44116282771156945,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.10640229960584413,
+        "atr_window": 13,
+        "atr_mult": 1.9507784968414392,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.5331723959971573
+      },
+      "metrics": {
+        "TotalReturn": 0.680963949937258,
+        "MaxDD": -0.1730138096014966,
+        "SharpeD": 0.8567287486722784,
+        "BuyHold": 0.29977997799779965,
+        "CAGR": 0.10972892874345597
+      }
+    },
+    {
+      "name": "SKF B – balanced",
+      "ticker": "SKF B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 7,
+        "rsi_min": 13.55715672054486,
+        "rsi_max": 60.072091944988536,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 126,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 34,
+        "macd_signal": 10,
+        "use_bb_filter": true,
+        "bb_window": 20,
+        "bb_nstd": 1.5933135652162127,
+        "bb_min": 0.3556546090835021,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.14126174235018094,
+        "atr_window": 11,
+        "atr_mult": 2.389913403986351,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.2530498555812484
+      },
+      "metrics": {
+        "TotalReturn": 0.6921518035714989,
+        "MaxDD": -0.2609061185275382,
+        "SharpeD": 1.0369517611846295,
+        "BuyHold": 0.29977997799779965,
+        "CAGR": 0.11120563690442342
+      }
+    },
+    {
+      "name": "SKF B – aggressive",
+      "ticker": "SKF B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 10,
+        "rsi_min": 30.96379725477319,
+        "rsi_max": 65.2290953340713,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 85,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 27,
+        "macd_signal": 11,
+        "use_bb_filter": false,
+        "bb_window": 17,
+        "bb_nstd": 2.267176411250783,
+        "bb_min": 0.4449098337271685,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.14247895714633546,
+        "atr_window": 20,
+        "atr_mult": 2.649490889921604,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 1.807022701868515
+      },
+      "metrics": {
+        "TotalReturn": 0.5632580508054477,
+        "MaxDD": -0.3175483585888277,
+        "SharpeD": 0.542363959677063,
+        "BuyHold": 0.29977997799779965,
+        "CAGR": 0.09369607626527321
+      }
+    }
+  ]
+}

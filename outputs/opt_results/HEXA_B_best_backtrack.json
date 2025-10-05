@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "HEXA B – conservative",
+      "ticker": "HEXA B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 27.795304308704413,
+        "rsi_max": 63.557397465917575,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 89,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 8,
+        "macd_slow": 21,
+        "macd_signal": 8,
+        "use_bb_filter": false,
+        "bb_window": 21,
+        "bb_nstd": 1.760407197249473,
+        "bb_min": 0.17379863323317574,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.08169437645228397,
+        "atr_window": 15,
+        "atr_mult": 1.7219163221074074,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.450931357780063
+      },
+      "metrics": {
+        "TotalReturn": 0.8307968626430773,
+        "MaxDD": -0.12549568570965364,
+        "SharpeD": 1.092032755204555,
+        "BuyHold": 0.2586101859463521,
+        "CAGR": 0.12881215594952233
+      }
+    },
+    {
+      "name": "HEXA B – balanced",
+      "ticker": "HEXA B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 31.95576441633716,
+        "rsi_max": 73.4506461163468,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 108,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 27,
+        "macd_signal": 11,
+        "use_bb_filter": false,
+        "bb_window": 17,
+        "bb_nstd": 1.7497436816388152,
+        "bb_min": 0.22639662918096387,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.10089363384623755,
+        "atr_window": 17,
+        "atr_mult": 2.6649535089080305,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 1.85205585093941
+      },
+      "metrics": {
+        "TotalReturn": 0.8440286852076304,
+        "MaxDD": -0.31437719148282317,
+        "SharpeD": 0.7498655966634945,
+        "BuyHold": 0.2586101859463521,
+        "CAGR": 0.1304420275559781
+      }
+    },
+    {
+      "name": "HEXA B – aggressive",
+      "ticker": "HEXA B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 32.99427329107989,
+        "rsi_max": 60.733542867359986,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 108,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 23,
+        "macd_signal": 10,
+        "use_bb_filter": false,
+        "bb_window": 22,
+        "bb_nstd": 2.337821359302412,
+        "bb_min": 0.1786182690488663,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.10973933785336387,
+        "atr_window": 17,
+        "atr_mult": 1.9038689321536224,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.3397527131098155
+      },
+      "metrics": {
+        "TotalReturn": 0.6742355458696911,
+        "MaxDD": -0.2189122501204792,
+        "SharpeD": 0.6660267760716472,
+        "BuyHold": 0.2586101859463521,
+        "CAGR": 0.10877420708985008
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "ticker": "VOLV B",
+  "start": "2024-09-01",
+  "end": "2025-09-08",
+  "strategy": "ma_cross",
+  "params": {
+    "breakout_lookback": null,
+    "exit_lookback": null,
+    "fast_ma": 8,
+    "slow_ma": 50,
+    "use_trend_filter": true,
+    "trend_ma_window": 54,
+    "trend_ma_type": "SMA",
+    "rsi_entry": null,
+    "rsi_exit": null,
+    "stop_loss_pct": 0.08,
+    "take_profit_pct": 0.215,
+    "trailing_stop_pct": null,
+    "peak_stop_pct": null,
+    "atr_period": 5,
+    "breakeven_atr_mult": 2.7755575615628914e-17,
+    "cooldown_days_after_sl": 8
+  }
+}

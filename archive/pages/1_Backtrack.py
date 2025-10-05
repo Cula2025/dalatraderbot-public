@@ -210,7 +210,7 @@ with col_btn_fetch:
             state["df"] = normalize_df(df)
             st.success(f"Läste {len(state['df'])} rader. Period: "
                        f"{state['df']['Date'].iloc[0].date()} → {state['df']['Date'].iloc[-1].date()}")
-            st.dataframe(state["df"].tail(5), use_container_width=True)
+            st.dataframe(state["df"].tail(5), width='stretch')
         except Exception as e:
             st.error(f"Kunde inte ladda/städa data: {e}")
 
@@ -260,13 +260,13 @@ if run_all:
 
         # Graf + markeringar
         chart = plot_equity_with_trades(eq, trades, title=chosen)
-        st.altair_chart(chart, use_container_width=True)
+        st.altair_chart(chart, width='stretch')
 
         # Trades tabell
         if isinstance(trades, pd.DataFrame) and not trades.empty:
             keep = [c for c in ["EntryTime","EntryPrice","ExitTime","ExitPrice","PnL","reason"] if c in trades.columns]
             st.dataframe(trades[keep].sort_values("EntryTime", ascending=False),
-                         use_container_width=True)
+                         width='stretch')
         else:
             st.caption("Inga trades att visa.")
 

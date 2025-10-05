@@ -1,0 +1,201 @@
+Ticker,Name,MIC,Date,Close,Score,RSI,RSI_cross_up,MACD_cross_up,Breakout20,Vol_spike
+NOKIA SEK,Nokia,,2025-09-04,43.09,0.6288,70.6,False,False,True,1.542
+IAR B,I.A.R Systems,,2025-09-04,179.4,0.6,80.0,False,False,True,0.0
+NETI B,Net Insight,,2025-09-04,4.845,0.5936,75.19,False,False,True,0.577
+MOB,Moberg Pharma,,2025-09-04,9.5,0.5568,64.31,False,False,True,1.661
+TEL2 B,Tele2 B,,2025-09-04,167.2,0.5416,74.56,False,False,True,0.141
+ENRO,Eniro,,2025-09-04,0.4,0.5,30.77,False,True,False,2.0
+DMYD B,Diamyd Medical,,2025-09-04,11.88,0.4028,62.05,False,False,True,0.422
+CNCJO B,Concejo B,,2025-09-04,50.6,0.385,78.87,False,False,False,0.0
+NOLA B,Nolato,,2025-09-04,58.4,0.3798,55.98,False,True,False,0.0
+CEVI,CellaVision,,2025-09-04,169.0,0.3667,62.5,False,False,False,2.0
+BORG,Björn Borg,,2025-09-04,63.4,0.3544,76.58,False,False,False,0.0
+MOMENT,Moment Group,,2025-09-04,6.96,0.3455,41.54,False,True,False,0.455
+MTG B,Modern Times Group B,,2025-09-04,99.2,0.33,51.74,True,True,False,0.068
+ABB,ABB,,2025-09-04,648.2,0.3245,55.22,True,False,True,0.549
+ATCO A,Atlas Copco A,,2025-09-04,152.55,0.3145,56.39,False,False,True,0.294
+PACT,Proact IT,,2025-09-04,91.6,0.3114,50.86,True,True,False,0.0
+BIOG B,BioGaia,,2025-09-04,103.2,0.3005,72.54,False,False,False,0.0
+PROF B,ProfilGruppen,,2025-09-04,156.0,0.3,45.71,False,True,False,0.0
+GENI,Generic Sweden,,2025-09-04,51.2,0.3,43.94,False,True,False,0.0
+EWRK,eWork,,2025-09-04,113.4,0.2716,70.37,False,False,False,0.0
+HM B,Hennes & Mauritz,,2025-09-04,145.05,0.2668,55.0,False,False,True,0.001
+MSAB B,Micro Systemation,,2025-09-04,64.2,0.2636,69.77,False,False,False,0.0
+BOL,Boliden,,2025-09-04,329.0,0.2606,54.23,False,False,True,0.043
+LNFI,LN Future Invest,,2025-09-04,1.24,0.2546,54.1,True,False,False,2.0
+BINERO,Binero Group,,2025-09-04,2.6,0.2303,67.27,False,False,False,0.0
+CTT,CTT Systems,,2025-09-04,228.5,0.2214,56.73,False,False,False,1.317
+CLA B,Cloetta,,2025-09-04,32.84,0.2161,66.21,False,False,False,0.0
+ALIV SDB,Autoliv,,2025-09-04,1171.0,0.2143,66.07,False,False,False,0.0
+AZN,AstraZeneca,,2025-09-04,1554.0,0.2042,65.31,False,False,False,0.0
+TREL B,Trelleborg,,2025-09-04,365.0,0.2037,60.44,False,False,False,0.645
+RO,Rolling Optics,,2025-09-04,1.11,0.2,46.05,False,False,False,2.0
+CCC,Cavotec,,2025-09-04,15.05,0.2,50.0,False,False,True,0.0
+ITAB,ITAB Shop Concept,,2025-09-04,17.44,0.1882,56.22,False,False,False,1.053
+NEWA B,New Wave,,2025-09-04,109.3,0.1772,63.29,False,False,False,0.0
+TIETOS,TietoEVRY,,2025-09-04,173.5,0.1707,62.8,False,False,False,0.0
+ERIC B,Ericsson B,,2025-09-04,75.52,0.157,59.14,False,False,False,0.351
+HMS,HMS Networks,,2025-09-04,442.0,0.1547,61.6,False,False,False,0.0
+ELAN B,Elanders,,2025-09-04,56.2,0.1458,60.94,False,False,False,0.0
+HUFV A,Hufvudstaden A,,2025-09-04,122.7,0.1454,58.28,False,False,False,0.35
+SVED B,Svedbergs,,2025-09-04,57.3,0.1449,60.87,False,False,False,0.0
+AAK,AAK,,2025-09-04,264.0,0.1402,60.51,False,False,False,0.0
+VBG B,VBG Group,,2025-09-04,290.4,0.1342,60.07,False,False,False,0.0
+ANOD B,Addnode,,2025-09-04,112.0,0.1333,60.0,False,False,False,0.0
+DURC B,Duroc,,2025-09-04,16.7,0.1333,60.0,False,False,False,0.0
+SECT B,Sectra,,2025-09-04,327.4,0.1286,29.15,False,False,False,1.286
+ORRON,Orrön Energy,,2025-09-04,4.334,0.125,59.37,False,False,False,0.0
+ALFA,Alfa Laval,,2025-09-04,427.7,0.1207,53.52,False,False,False,0.737
+HPOL B,Hexpol,,2025-09-04,82.35,0.1161,42.47,False,False,False,1.161
+XANO B,XANO Industri,,2025-09-04,58.3,0.1133,25.0,False,False,False,1.133
+TELIA,Telia Company,,2025-09-04,35.7,0.1116,55.52,False,False,False,0.379
+KINV B,Kinnevik B,,2025-09-04,80.88,0.1084,30.39,False,False,False,1.084
+EPEN,Ependion,,2025-09-04,125.8,0.1057,57.93,False,False,False,0.0
+SKIS B,SkiStar,,2025-09-04,157.3,0.1033,56.58,True,False,False,0.156
+OEM B,OEM International,,2025-09-04,126.0,0.1028,29.93,False,False,False,1.028
+NAXS,NAXS,,2025-09-04,68.6,0.0984,57.38,False,False,False,0.0
+RROS,Rottneros,,2025-09-04,3.24,0.0973,57.3,False,False,False,0.0
+GETI B,Getinge,,2025-09-04,209.0,0.0925,56.94,False,False,False,0.0
+MYCR,Mycronic,,2025-09-04,204.0,0.0921,39.82,False,False,False,0.921
+LOOMIS,Loomis,,2025-09-04,417.8,0.0912,56.84,False,False,False,0.0
+BTS B,BTS Group,,2025-09-04,189.6,0.0864,56.48,False,False,False,0.0
+SOBI,Swedish Orphan Biovitrum,,2025-09-04,274.0,0.0853,50.19,False,False,False,0.827
+FOI B,Fenix Outdoor,,2025-09-04,511.0,0.0845,56.34,False,False,False,0.0
+LAMM B,Lammhults Design,,2025-09-04,38.1,0.08,56.0,False,False,False,0.0
+REJL B,Rejlers,,2025-09-04,195.6,0.0773,55.8,False,False,False,0.0
+MER,Meren Energy,,2025-09-04,11.9,0.0672,51.34,False,False,False,0.493
+DIOS,Diös Fastigheter,,2025-09-04,62.45,0.0624,39.25,False,False,False,0.624
+ASSA B,Assa Abloy,,2025-09-04,335.8,0.0601,53.76,True,False,False,0.099
+SKF B,SKF B,,2025-09-04,238.4,0.0545,54.09,False,False,False,0.0
+AXFO,Axfood,,2025-09-04,306.4,0.0521,53.91,False,False,False,0.0
+ARCT,Arctic Minerals,,2025-09-04,5.15,0.0515,47.37,False,False,False,0.515
+PREV B,Prevas,,2025-09-04,69.7,0.0513,53.85,False,False,False,0.0
+PION B,PION Group,,2025-09-04,5.7,0.0483,53.62,True,False,False,0.0
+SAAB B,Saab,,2025-09-04,505.9,0.048,48.67,False,False,False,0.48
+BRE2,Bredband2,,2025-09-04,3.25,0.0458,40.0,False,False,False,0.458
+BILL,Billerud,,2025-09-04,88.3,0.0458,53.44,False,False,False,0.0
+SINT,SinterCast,,2025-09-04,109.5,0.0455,41.18,False,False,False,0.455
+BRIN B,Brinova Fastigheter,,2025-09-04,15.5,0.0445,17.95,False,False,False,0.445
+DUNI,Duni,,2025-09-04,90.7,0.041,47.37,False,False,False,0.41
+LEVEL,Nordic LEVEL,,2025-09-04,0.638,0.0392,52.94,True,False,False,0.0
+CAT B,Catella B,,2025-09-04,29.6,0.0379,52.85,True,False,False,0.0
+LUMI,Lundin Mining,,2025-09-04,109.5,0.0351,52.63,False,False,False,0.0
+LAGR B,Lagercrantz,,2025-09-04,215.8,0.035,34.29,False,False,False,0.35
+SWEC B,Sweco B,,2025-09-04,161.0,0.0317,52.38,False,False,False,0.0
+ADDV A,ADDvise Group A,,2025-09-04,2.76,0.0278,44.44,False,False,False,0.278
+ADDT B,Addtech,,2025-09-04,319.4,0.0261,35.33,False,False,False,0.261
+KAKEL,Kakel Max,,2025-09-04,9.1,0.023,51.72,False,False,False,0.0
+VIVE,Vivesto,,2025-09-04,0.23,0.0188,42.86,False,False,False,0.188
+CLAS B,Clas Ohlson,,2025-09-04,328.2,0.0183,29.41,False,False,False,0.183
+CATE,Catena,,2025-09-04,418.4,0.0167,31.61,False,False,False,0.167
+BALD B,Fast Balder,,2025-09-04,65.98,0.0159,44.73,False,False,False,0.159
+EOLU B,Eolus,,2025-09-04,41.95,0.0138,8.26,False,False,False,0.138
+DRIL,Drillcon,,2025-09-04,3.92,0.0113,50.85,True,False,False,0.0
+ANOT,Anoto,,2025-09-04,0.0562,0.0097,40.85,False,False,False,0.097
+PRIC B,Pricer,,2025-09-04,4.585,0.0091,50.68,False,False,False,0.0
+KDEV,Karolinska Development,,2025-09-04,0.959,0.0083,43.04,False,False,False,0.083
+ARISE,Arise Windpower,,2025-09-04,33.55,0.0072,31.71,False,False,False,0.072
+PREC,Precise Biometrics,,2025-09-04,2.84,0.0042,50.32,True,False,False,0.0
+SAND,Sandvik,,2025-09-04,239.6,0.0,50.0,False,False,False,0.0
+DIST,DistIT,,2025-09-04,0.347,0.0,49.2,False,False,False,0.0
+SAVE,Nordnet,,2025-09-04,272.8,0.0,48.81,False,False,False,0.0
+AVT B,Avtech,,2025-09-04,11.05,0.0,48.68,False,False,False,0.0
+NOTE,NOTE,,2025-09-04,183.6,0.0,48.59,False,False,False,0.0
+MSON B,Midsona B,,2025-09-04,8.04,0.0,48.53,False,False,False,0.0
+FPIP,Formpipe Software,,2025-09-04,27.0,0.0,48.44,False,False,False,0.0
+SAFETY B,mySafety,,2025-09-04,18.7,0.0,48.44,False,False,False,0.0
+AFRY,AFRY,,2025-09-04,148.0,0.0,48.07,False,False,False,0.0
+SOF B,Softronic,,2025-09-04,22.65,0.0,47.62,False,False,False,0.0
+BETS B,Betsson,,2025-09-04,156.3,0.0,47.46,False,False,False,0.0
+EPIS B,Episurf Medical,,2025-09-04,0.048,0.0,47.25,False,False,False,0.0
+FAG,Fagerhult,,2025-09-04,39.35,0.0,47.1,False,False,False,0.0
+BOUL,Boule Diagnostics,,2025-09-04,6.1,0.0,46.48,False,False,False,0.0
+CORE A,Corem Property A,,2025-09-04,5.0,0.0,46.25,False,False,False,0.0
+MVIR,Medivir,,2025-09-04,1.952,0.0,46.22,False,False,False,0.0
+NOBI,Nobia,,2025-09-04,4.612,0.0,46.22,False,False,False,0.0
+SCA B,SCA B,,2025-09-04,125.95,0.0,46.11,False,False,False,0.0
+VITR,Vitrolife,,2025-09-04,134.2,0.0,46.01,False,False,False,0.0
+HAKI B,HAKI Safety B,,2025-09-04,20.6,0.0,45.71,False,False,False,0.0
+EAST,Eastnine,,2025-09-04,46.1,0.0,45.31,False,False,False,0.0
+ORX,Orexo,,2025-09-04,20.1,0.0,44.87,False,False,False,0.0
+LIAB,Lindab,,2025-09-04,201.0,0.0,44.86,False,False,False,0.0
+RATO B,Ratos B,,2025-09-04,34.72,0.0,44.62,False,False,False,0.0
+BONG,Bong Ljungdahl,,2025-09-04,0.648,0.0,44.44,False,False,False,0.0
+IS,Image Systems,,2025-09-04,1.88,0.0,44.44,False,False,False,0.0
+NMAN,Nederman,,2025-09-04,165.2,0.0,44.36,False,False,False,0.0
+VNV,VNV Global,,2025-09-04,22.2,0.0,43.96,False,False,False,0.0
+BMAX,Byggmax,,2025-09-04,56.7,0.0,43.9,False,False,False,0.0
+LUND B,Lundbergföretagen,,2025-09-04,476.2,0.0,43.9,False,False,False,0.0
+SAGA A,Sagax A,,2025-09-04,202.0,0.0,43.52,False,False,False,0.0
+AZA,Avanza Bank,,2025-09-04,345.3,0.0,43.51,False,False,False,0.0
+AVEN,Avensia,,2025-09-04,9.86,0.0,43.14,False,False,False,0.0
+SECU B,Securitas,,2025-09-04,145.45,0.0,42.86,False,False,False,0.0
+SVOL B,Svolder B,,2025-09-04,53.15,0.0,42.75,False,False,False,0.0
+HOLM B,Holmen B,,2025-09-04,359.4,0.0,42.7,False,False,False,0.0
+INDU C,Industrivärden C,,2025-09-04,368.5,0.0,42.62,False,False,False,0.0
+BERG B,Bergman & Beving,,2025-09-04,325.5,0.0,42.59,False,False,False,0.0
+HAV B,Havsfrun Investment,,2025-09-04,18.1,0.0,42.48,False,False,False,0.0
+INDT,Indutrade,,2025-09-04,229.2,0.0,42.48,False,False,False,0.0
+VSSAB B,Viking Supply,,2025-09-04,113.5,0.0,42.42,False,False,False,0.0
+INVE B,Investor B,,2025-09-04,290.0,0.0,42.36,False,False,False,0.0
+BILI A,Bilia,,2025-09-04,114.1,0.0,42.06,False,False,False,0.0
+GENO,Genovis,,2025-09-04,22.65,0.0,42.04,False,False,False,0.0
+CRED A,Creades,,2025-09-04,76.6,0.0,41.9,False,False,False,0.0
+STE R,Stora Enso R,,2025-09-04,106.2,0.0,41.28,False,False,False,0.0
+BURE,Bure Equity,,2025-09-04,270.6,0.0,41.18,False,False,False,0.0
+ATRLJ B,Atrium Ljungberg,,2025-09-04,30.47,0.0,40.64,False,False,False,0.0
+ACTI,Active Biotech,,2025-09-04,0.1668,0.0,40.45,False,False,False,0.0
+CRAD B,C-RAD,,2025-09-04,32.3,0.0,40.32,False,False,False,0.0
+SEB A,SEB A,,2025-09-04,176.7,0.0,40.0,False,False,False,0.0
+NELLY,Nelly Group,,2025-09-04,79.0,0.0,39.83,False,False,False,0.0
+HEBA B,Heba,,2025-09-04,29.75,0.0,39.6,False,False,False,0.0
+STWK,Stockwik Förvaltning,,2025-09-04,21.1,0.0,39.29,False,False,False,0.0
+NCC B,NCC B,,2025-09-04,189.0,0.0,39.2,False,False,False,0.0
+BULTEN,Bulten,,2025-09-04,54.6,0.0,39.06,False,False,False,0.0
+ENEA,Enea,,2025-09-04,75.3,0.0,38.96,False,False,False,0.0
+PEAB B,Peab,,2025-09-04,72.85,0.0,38.6,False,False,False,0.0
+DORO,Doro,,2025-09-04,39.45,0.0,38.18,False,False,False,0.0
+KNOW,KnowIT,,2025-09-04,109.8,0.0,37.63,False,False,False,0.0
+SVIK,Studsvik,,2025-09-04,185.0,0.0,37.14,False,False,False,0.0
+DIAH,Diadrom,,2025-09-04,5.5,0.0,36.96,False,False,False,0.0
+EKTA B,Elekta,,2025-09-04,45.08,0.0,35.83,False,False,False,0.0
+SWED A,Swedbank,,2025-09-04,266.3,0.0,35.36,False,False,False,0.0
+TRAC B,Traction,,2025-09-04,254.0,0.0,35.29,False,False,False,0.0
+TRAD,TradeDoubler,,2025-09-04,7.5,0.0,35.29,False,False,False,0.0
+BEIJ B,Beijer Ref,,2025-09-04,160.55,0.0,34.99,False,False,False,0.0
+WIHL,Wihlborgs Fastigheter,,2025-09-04,91.25,0.0,34.86,False,False,False,0.0
+HEXA B,Hexagon,,2025-09-04,102.55,0.0,34.82,False,False,False,0.0
+SKA B,Skanska,,2025-09-04,232.0,0.0,34.38,False,False,False,0.0
+SSAB A,SSAB A,,2025-09-04,53.68,0.0,34.24,False,False,False,0.0
+NDA SE,Nordea Bank,,2025-09-04,147.6,0.0,34.15,False,False,False,0.0
+FIRE,Firefly,,2025-09-04,177.4,0.0,34.11,False,False,False,0.0
+ORTI B,Ortivus B,,2025-09-04,1.14,0.0,33.33,False,False,False,0.0
+SHB A,Handelsbanken A,,2025-09-04,120.65,0.0,32.91,False,False,False,0.0
+ELON,Elon,,2025-09-04,19.55,0.0,32.82,False,False,False,0.0
+VOLV B,Volvo B,,2025-09-04,277.1,0.0,32.63,False,False,False,0.0
+LATO B,Latour,,2025-09-04,232.1,0.0,32.56,False,False,False,0.0
+WALL B,Wallenstam,,2025-09-04,42.4,0.0,32.23,False,False,False,0.0
+FPAR A,Fastpartner A,,2025-09-04,47.05,0.0,32.05,False,False,False,0.0
+ELUX B,Electrolux B,,2025-09-04,54.22,0.0,31.89,False,False,False,0.0
+SGG,Sensys Gatso,,2025-09-04,38.85,0.0,30.71,False,False,False,0.0
+FING B,Fingerprint Cards,,2025-09-04,17.03,0.0,30.35,False,False,False,0.0
+HUSQ B,Husqvarna B,,2025-09-04,52.52,0.0,29.93,False,False,False,0.0
+K33,K33,,2025-09-04,0.0464,0.0,29.9,False,False,False,0.0
+FABG,Fabege,,2025-09-04,77.35,0.0,28.91,False,False,False,0.0
+VIT B,Vitec Software,,2025-09-04,347.0,0.0,28.46,False,False,False,0.0
+CAST,Castellum,,2025-09-04,103.65,0.0,28.02,False,False,False,0.0
+ORES,Öresund,,2025-09-04,116.6,0.0,27.87,False,False,False,0.0
+NTEK B,Novotek,,2025-09-04,84.2,0.0,27.15,False,False,False,0.0
+MEKO,MEKO,,2025-09-04,78.6,0.0,26.04,False,False,False,0.0
+NIBE B,NIBE Industrier,,2025-09-04,37.37,0.0,24.31,False,False,False,0.0
+BEIA B,Beijer Alma,,2025-09-04,240.5,0.0,23.94,False,False,False,0.0
+DEDI,Dedicare,,2025-09-04,45.4,0.0,23.24,False,False,False,0.0
+BEGR,BE Group,,2025-09-04,25.5,0.0,23.0,False,False,False,0.0
+JM,JM,,2025-09-04,130.4,0.0,22.98,False,False,False,0.0
+LOGI A,Logistea A,,2025-09-04,15.25,0.0,22.86,False,False,False,0.0
+MEAB B,Malmbergs Elektriska,,2025-09-04,35.0,0.0,21.78,False,False,False,0.0
+INTRUM,Intrum,,2025-09-04,47.14,0.0,19.98,False,False,False,0.0
+KABE B,Kabe,,2025-09-04,222.0,0.0,19.78,False,False,False,0.0
+SYSR,Systemair,,2025-09-04,82.1,0.0,19.47,False,False,False,0.0
+RAY B,RaySearch Laboratories,,2025-09-04,242.0,0.0,18.63,False,False,False,0.0
+BINV,Bioinvent,,2025-09-04,28.75,0.0,12.59,False,False,False,0.0

@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "SEB A – conservative",
+      "ticker": "SEB A",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 9,
+        "rsi_min": 27.7239692006812,
+        "rsi_max": 76.12238969819026,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 107,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 34,
+        "macd_signal": 10,
+        "use_bb_filter": true,
+        "bb_window": 20,
+        "bb_nstd": 2.1141185001875824,
+        "bb_min": 0.4689579305538769,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.09694337773468917,
+        "atr_window": 18,
+        "atr_mult": 2.422763295639802,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.623395677808058
+      },
+      "metrics": {
+        "TotalReturn": 1.5020556868680317,
+        "MaxDD": -0.09912937595129367,
+        "SharpeD": 1.53779209895387,
+        "BuyHold": 1.3457583547557843,
+        "CAGR": 0.20171479787111357
+      }
+    },
+    {
+      "name": "SEB A – balanced",
+      "ticker": "SEB A",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 11,
+        "rsi_min": 26.607611625071314,
+        "rsi_max": 80.29479211663536,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 78,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 31,
+        "macd_signal": 10,
+        "use_bb_filter": true,
+        "bb_window": 18,
+        "bb_nstd": 2.2719872545709117,
+        "bb_min": 0.46651494319473874,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.08275388845643909,
+        "atr_window": 10,
+        "atr_mult": 1.5129798655833049,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.325170517230408
+      },
+      "metrics": {
+        "TotalReturn": 0.9817528789606333,
+        "MaxDD": -0.1206499277679719,
+        "SharpeD": 1.0758631744268132,
+        "BuyHold": 1.3457583547557843,
+        "CAGR": 0.1468742820940363
+      }
+    },
+    {
+      "name": "SEB A – aggressive",
+      "ticker": "SEB A",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 8,
+        "rsi_min": 32.14486935685292,
+        "rsi_max": 80.84619208275643,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 85,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 35,
+        "macd_signal": 6,
+        "use_bb_filter": false,
+        "bb_window": 20,
+        "bb_nstd": 1.578739809783186,
+        "bb_min": 0.1320806867835856,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.14674016088160446,
+        "atr_window": 16,
+        "atr_mult": 2.779556414474159,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.898892474241068
+      },
+      "metrics": {
+        "TotalReturn": 1.4474824295732636,
+        "MaxDD": -0.1917785446063559,
+        "SharpeD": 1.1605202784486812,
+        "BuyHold": 1.3457583547557843,
+        "CAGR": 0.19641683792182674
+      }
+    }
+  ]
+}

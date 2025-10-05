@@ -1,282 +1,259 @@
-from app.debug_banner import show as debug_banner
-from app.debuglog import setup_debug_ui, log_info, log_warn, log_error, df_brief
-def _log(msg, level='INFO'):
-    if level == 'INFO':
-        log_info(msg)
-    elif level == 'WARN':
-        log_warn(msg)
-    else:
-        log_error(msg)
-# -*- coding: utf-8 -*-
-# --- BEGIN _import_backtest shim (idempotent) ---
-try:
-    from app.portfolio_signals import _import_backtest as __orig__import_backtest
-    def _import_backtest(*args, **kwargs):
-        """
-        Compat shim:
-        - _import_backtest()            -> returns module or (RUN_BT, Params)
-        - _import_backtest(df, params)  -> runs backtest with args (legacy call sites)
-        """
-        mod_or_tuple = __orig__import_backtest()
-        if not args and not kwargs:
-            return mod_or_tuple
-        if isinstance(mod_or_tuple, tuple):
-            run_bt = mod_or_tuple[0]
-            return run_bt(*args, **kwargs)
-        for name in ("backtest", "run_backtest", "simulate", "run"):
-            fn = getattr(mod_or_tuple, name, None)
-            if callable(fn):
-                return fn(*args, **kwargs)
-        if callable(mod_or_tuple):
-            return mod_or_tuple(*args, **kwargs)
-        raise TypeError("Hittar ingen backtest-funktion i modulen från _import_backtest()")
-except Exception:
-    pass
-# --- END _import_backtest shim ---
-from app.btwrap import run_backtest as _RUNBT
-from app.btwrap import run_backtest as _run_backtest
-from datetime import date
+from __future__ import annotations
+import json, re
 from pathlib import Path
-import json
+from datetime import date
+from typing import Dict, List, Optional, Tuple
+
+import numpy as np
 import pandas as pd
 import streamlit as st
-import altair as alt
 
-from app.data_providers import get_ohlcv as GET_OHLCV
-from app.portfolio_signals import (
-load_best_params_for_ticker, run_profile_positions, run_profile_trades,
-    build_portfolio_with_caps, to_price_matrix,
-    buyhold_equity_from_price, equal_weight_buyhold_equity, index_equity,
-)
+# --- Samma dataväg som Backtest MIN ---
+GET = None           # app.data_providers.get_ohlcv (Börsdata)
+RUN_WRAP = None      # app.btwrap.run_backtest (om finns)
+RUN_RAW  = None      # backtest.run_backtest (fallback)
 
+try:
+    from app.data_providers import get_ohlcv as GET
+except Exception as e:
+    st.error(f"Kunde inte importera app.data_providers.get_ohlcv: {type(e).__name__}: {e}")
 
-st.set_page_config(page_title="Dala Trader – Portfolio", page_icon="💼", layout="wide")
+try:
+    from app.btwrap import run_backtest as RUN_WRAP
+except Exception:
+    RUN_WRAP = None
 
-debug_banner('Debug 0.1')
-st.title("💼 Portfolio (profiler)")
+try:
+    from backtest import run_backtest as RUN_RAW
+except Exception:
+    RUN_RAW = None
 
-_debug = setup_debug_ui("Backtest")
-with st.sidebar:
-    # Logga (absolut sökväg)
-    _BASE = Path(__file__).resolve().parents[1]
-    _LOGO = _BASE / "assets" / "logodaladrader.png"
-    if _LOGO.exists():
-        st.image(str(_LOGO), use_container_width=True)
-        st.markdown('<div style="height:8px"></div>', unsafe_allow_html=True)
+st.set_page_config(page_title="Dala Trader – Portfolio (Profiler)", page_icon="🧺", layout="wide")
+st.title("🧺 Portfolio – Profiler")
 
-    st.subheader("Inställningar")
-    start = st.date_input("Startdatum", value=date(2020,1,1))
-    prof_dir_str = st.text_input("Profilkatalog", value="/srv/trader/app/profiles")
-    use_auto_universe = st.checkbox("Använd alla tickers i profilkatalogen", value=True)
-    tickers_text = st.text_area(
-        "Tickers (en per rad eller kommaseparerat)",
-        value="HM-B.ST", height=100, disabled=use_auto_universe
-    )
-    index_ticker = st.text_input("Index-ticker (för jämförelse)", value="OMXS30")
-    max_per_asset = st.slider("Max per aktie", 0.0, 1.0, 1.0, 0.05)
-    max_total_equity = st.slider("Max totalt i aktier", 0.0, 1.0, 1.0, 0.05)
-    max_positions = st.number_input("Max antal samtidiga innehav", min_value=1, max_value=50, value=30, step=1)
+# ---------- Profilhantering ----------
+PROF_DIR = Path("/srv/trader/app/profiles") if Path("/srv/trader/app/profiles").exists() else Path("profiles")
 
-profiles_dir = Path(prof_dir_str).expanduser().resolve()
-
-def _discover_tickers_from_profiles(pdir: Path) -> list[str]:
-    out = set()
-    for fp in sorted(pdir.glob("*.json")):
+def read_profiles() -> Tuple[List[str], Dict[str, List[dict]]]:
+    """Läs alla profiler från profiles/*.json och returnera (tickers, map[ticker->list[profile]])"""
+    tickers: List[str] = []
+    pmap: Dict[str, List[dict]] = {}
+    if not PROF_DIR.exists():
+        return tickers, pmap
+    files = sorted(PROF_DIR.glob("*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+    for fp in files:
         try:
             data = json.loads(fp.read_text(encoding="utf-8"))
-            for prof in data.get("profiles", []):
-                t = prof.get("ticker")
-                if isinstance(t, str) and t.strip():
-                    t2 = t.strip().upper().replace(" ", "-")
-                    if not t2.endswith(".ST"):
-                        t2 += ".ST"
-                    out.add(t2)
+            arr = data.get("profiles", [])
+            if not isinstance(arr, list): 
+                continue
+            for prof in arr:
+                if not isinstance(prof, dict):
+                    continue
+                t = prof.get("ticker") or prof.get("Ticker") or ""
+                t = str(t).strip()
+                if not t:
+                    continue
+                pmap.setdefault(t, []).append(prof)
         except Exception:
-            stem = fp.stem.split("_best")[0]
-            t2 = stem.replace("_","-").upper()
-            if not t2.endswith(".ST"):
-                t2 += ".ST"
-            out.add(t2)
-    return sorted(out)
+            # håll robust – bara hoppa över trasiga filer
+            continue
+    tickers = sorted(pmap.keys())
+    return tickers, pmap
 
-if use_auto_universe:
-    tickers = _discover_tickers_from_profiles(profiles_dir)
-else:
-    raw = [t.strip() for part in tickers_text.splitlines() for t in part.replace(",", " ").split()]
-    tickers = [t for t in raw if t]
+def pick_profile(profs: List[dict], flavor: str) -> Optional[dict]:
+    """Välj profil efter flavor: conservative/balanced/aggressive, case-insensitive."""
+    if not profs:
+        return None
+    f = flavor.lower()
+    # träffa på namn
+    for p in profs:
+        n = str(p.get("name","")).lower()
+        if f in n:
+            return p
+    # fallback: försök index 0/1/2 enligt ordning (conservative/balanced/aggressive)
+    idx = {"conservative":0, "balanced":1, "aggressive":2}.get(f, 0)
+    if 0 <= idx < len(profs):
+        return profs[idx]
+    return profs[0]
 
-if not tickers:
-    st.info("Ingen ticker hittad – lägg till profiler i katalogen eller avmarkera auto-universum.")
+# ---------- Hjälpare för BH/kurvor ----------
+def _ensure_close_series(df: pd.DataFrame) -> Optional[pd.Series]:
+    if df is None or not isinstance(df, pd.DataFrame) or df.empty:
+        return None
+    for c in ["Adj Close","adj_close","Close","close","c"]:
+        if c in df.columns:
+            s = pd.to_numeric(df[c], errors="coerce").dropna()
+            if not s.empty:
+                s.index = pd.to_datetime(df.index)
+                s = s.sort_index()
+                return s
+    # OHLC?
+    if all(x in df.columns for x in ("open","high","low","close")):
+        s = pd.to_numeric(df["close"], errors="coerce").dropna()
+        if not s.empty:
+            s.index = pd.to_datetime(df.index)
+            return s.sort_index()
+    if all(x in df.columns for x in ("Open","High","Low","Close")):
+        s = pd.to_numeric(df["Close"], errors="coerce").dropna()
+        if not s.empty:
+            s.index = pd.to_datetime(df.index)
+            return s.sort_index()
+    return None
+
+def buyhold_equity_from_price(s: pd.Series) -> pd.Series:
+    s = s.astype(float).dropna().sort_index()
+    eq = s / float(s.iloc[0])
+    eq.name = "Buy&Hold"
+    return eq
+
+def _series_from_result(res: dict) -> Optional[pd.Series]:
+    """Plocka ut equity-serie ur bt-resultat (olika fältnamn tolereras)."""
+    if not isinstance(res, dict):
+        return None
+    cand = res.get("equity") or res.get("equity_curve") or res.get("portfolio") or res.get("balance") or res.get("cumret")
+    if cand is None:
+        return None
+    try:
+        if isinstance(cand, dict):
+            s = pd.Series(cand)
+        elif isinstance(cand, list) and cand and isinstance(cand[0], dict):
+            kd = next((k for k in ["date","Date","ts","timestamp"] if k in cand[0]), None)
+            kv = next((k for k in ["equity","value","val","y","close","Close"] if k in cand[0]), None)
+            if kd and kv:
+                idx = pd.to_datetime([x[kd] for x in cand])
+                vals = [x[kv] for x in cand]
+                s = pd.Series(vals, index=idx)
+            else:
+                s = pd.Series(cand)
+        else:
+            s = pd.Series(cand)
+        s = pd.to_numeric(s, errors="coerce").dropna().sort_index()
+        if len(s)>0 and float(s.iloc[0])!=0.0:
+            s = s / float(s.iloc[0])
+        return s.rename("Strategy")
+    except Exception:
+        return None
+
+def run_strategy_or_bh(ticker: str, p: dict) -> Tuple[pd.Series, pd.Series]:
+    """För en ticker: försök strategi via RUN_WRAP/RUN_RAW; fallback BH; return (equity_strategy_or_bh, bh_always)"""
+    # Hämta data (behövs för BH och ev. RUN_RAW)
+    if GET is None:
+        raise RuntimeError("Ingen dataladdare (GET) tillgänglig.")
+    try:
+        df = GET(ticker, start=p.get("from_date"), end=p.get("to_date"))
+    except TypeError:
+        df = GET(ticker, p.get("from_date"), p.get("to_date"))
+    s_close = _ensure_close_series(df)
+    if s_close is None or s_close.empty:
+        raise ValueError(f"Börsdata returnerade ingen Close-serie för {ticker}.")
+    bh = buyhold_equity_from_price(s_close).rename(f"{ticker} · B&H")
+
+    # Försök btwrap
+    if RUN_WRAP is not None:
+        try:
+            res = RUN_WRAP(p={"ticker": ticker, "params": dict(p)})
+            s = _series_from_result(res)
+            if s is not None and not s.empty:
+                return s.rename(f"{ticker} · Strat"), bh
+        except Exception:
+            try:
+                res = RUN_WRAP(ticker, dict(p))
+                s = _series_from_result(res)
+                if s is not None and not s.empty:
+                    return s.rename(f"{ticker} · Strat"), bh
+            except Exception:
+                pass
+
+    # Fallback raw-backtest om finns
+    if RUN_RAW is not None:
+        try:
+            res = RUN_RAW(df, dict(p))
+            s = _series_from_result(res if isinstance(res, dict) else {"equity": res})
+            if s is not None and not s.empty:
+                return s.rename(f"{ticker} · Strat"), bh
+        except Exception:
+            pass
+
+    # Sista utväg: endast BH
+    return bh.rename(f"{ticker} · B&H"), bh
+
+# ---------- UI ----------
+st.caption("Läser universum från **profiles/**. Använder Börsdata via samma loader som Backtest MIN. Ingen CSV.")
+
+tickers_all, prof_map = read_profiles()
+
+with st.sidebar:
+    st.header("Universum & period")
+    use_auto_universe = st.checkbox("Använd alla tickers i profilkatalogen", value=True)
+    custom = st.multiselect("Eller välj manuellt", options=tickers_all, default=tickers_all, disabled=use_auto_universe)
+    sel = tickers_all if use_auto_universe else custom
+
+    flavor = st.radio("Profil-variant", ["conservative","balanced","aggressive"], index=1, horizontal=True)
+
+    # Period (hämtas in i prof-parametrar)
+    from_date = st.text_input("Från (YYYY-MM-DD)", value="2020-10-01")
+    to_date   = st.text_input("Till (YYYY-MM-DD)",  value=date.today().isoformat())
+
+    st.markdown("---")
+    go = st.button("🚀 Bygg portfölj", type="primary", use_container_width=True)
+
+if not sel:
+    st.info("Ingen ticker hittad – lägg till profiler i `profiles/` eller avmarkera auto-universum.")
     st.stop()
 
-rows = []
-positions: dict[str, pd.Series] = {}
-prices_map: dict[str, pd.DataFrame] = {}
-problems = []
+# ---------- Körning ----------
+if go:
+    curves: Dict[str, pd.Series] = {}
+    bh_curves: Dict[str, pd.Series] = {}
 
-with st.spinner("Laddar profiler, signaler och priser..."):
-    for t in tickers:
+    for t in sel:
+        profs = prof_map.get(t, [])
+        prof  = pick_profile(profs, flavor) or {}
+        params = dict(prof.get("params", {}))
+        # tvinga period från UI att gälla (Backtest MIN gör liknande)
+        params["from_date"] = from_date
+        params["to_date"]   = to_date
+
         try:
-            params, metrics, name, path = load_best_params_for_ticker(t, profiles_dir)
-            rows.append({
-                "Ticker": t, "Profil": name,
-                "TotalReturn": round(float(metrics.get("TotalReturn", 0.0)), 4),
-                "SharpeD": round(float(metrics.get("SharpeD", 0.0)), 4),
-                "Källa": path.name
-            })
+            strat, bh = run_strategy_or_bh(t, params)
+            curves[t]   = strat
+            bh_curves[t]= bh
         except Exception as e:
-            problems.append(f"❌ {t}: ingen profil ({e})"); continue
-        try:
-            s = run_profile_positions(t, params, start)
-            positions[t] = s
-        except Exception as e:
-            problems.append(f"❌ {t}: kunde inte skapa positioner ({e})"); continue
-        try:
-            dfp = GET_OHLCV(t, start=start, source="borsdata")
-            prices_map[t] = dfp
-        except Exception as e:
-            problems.append(f"❌ {t}: kunde inte hämta priser ({e})")
+            st.warning(f"{t}: {e}")
 
-if problems:
-    st.warning("Några problem:\n\n" + "\n".join(problems))
-if not positions or not prices_map:
-    st.error("Inget att visa ännu."); st.stop()
+    if not curves:
+        st.error("Hittade inga kurvor att rita (Börsdata eller motor returnerade inget).")
+        st.stop()
 
-# Gemensamma beräkningar
-P = to_price_matrix(prices_map)
-equity, W = build_portfolio_with_caps(
-    positions, P,
-    max_per_asset=max_per_asset,
-    max_total_equity=max_total_equity,
-    lag_days=1,
-    max_positions=max_positions
-)
-port = equity["value"].rename("Portfölj")
+    # Align & equal-weight
+    idx = sorted(set().union(*[s.index for s in curves.values()]))
+    dfS = pd.DataFrame({k: v.reindex(idx).ffill() for k,v in curves.items()}).dropna(how="all")
+    dfB = pd.DataFrame({k: v.reindex(idx).ffill() for k,v in bh_curves.items()}).dropna(how="all")
 
-if len(tickers) == 1:
-    base_price = P.iloc[:,0]
-    bh_raw = buyhold_equity_from_price(base_price).rename("Buy&Hold")
+    # Normalisera & EW
+    if not dfS.empty:
+        portS = dfS.mean(axis=1).rename("Portfölj · Strat")
+    else:
+        portS = None
+    if not dfB.empty:
+        portB = dfB.mean(axis=1).rename("Portfölj · B&H")
+    else:
+        portB = None
+
+    st.markdown("### Kurvor")
+    # Portfolio först
+    if portS is not None:
+        st.line_chart(portS, width='stretch', height=300)
+    if portB is not None:
+        st.line_chart(portB, width='stretch', height=300)
+
+    # Enskilda (kort)
+    with st.expander("Visa enskilda tickers"):
+        if not dfS.empty:
+            st.line_chart(dfS, width='stretch', height=300)
+        if not dfB.empty:
+            st.line_chart(dfB, width='stretch', height=300)
+
 else:
-    bh_raw = equal_weight_buyhold_equity(P).rename("Buy&Hold")
-
-idx_raw = index_equity(index_ticker, start)
-idx_raw = idx_raw.rename("OMXS30 (index)") if len(idx_raw) else None
-
-def _norm(s: pd.Series) -> pd.Series:
-    s = s.dropna();  return s / float(s.iloc[0]) if len(s) else s
-
-bh = bh_raw.reindex(port.index).ffill()
-cols = [_norm(port), _norm(bh)]
-if idx_raw is not None:
-    idx = idx_raw.reindex(port.index).ffill()
-    cols.append(_norm(idx))
-chart = pd.concat(cols, axis=1).dropna(how="all")
-
-tab1, tab2, tab3 = st.tabs(["📈 Översikt", "🧭 Universum", "📄 Transaktioner"])
-
-with tab1:
-    st.subheader("Kapitalutveckling (normaliserad till 1.0)")
-    df_long = chart.reset_index()
-    date_col = df_long.columns[0]
-    df_long = df_long.melt(id_vars=[date_col], var_name="Series", value_name="Value")
-    sel = alt.selection_point(fields=["Series"], bind="legend")
-    ch = (alt.Chart(df_long)
-        .mark_line(interpolate="monotone")
-        .encode(
-            x=alt.X(f"{date_col}:T", title="Datum"),
-            y=alt.Y("Value:Q", title="Normaliserat (x)"),
-            color=alt.Color("Series:N"),
-            tooltip=[alt.Tooltip(f"{date_col}:T", title="Datum"), "Series:N", alt.Tooltip("Value:Q", format=".2f")]
-        )
-        .add_params(sel)
-        .transform_filter(sel)
-        .properties(height=420)
-        .configure(background="#0E1117")
-        .configure_axis(labelColor="#EAEFF2", titleColor="#EAEFF2", gridColor="#27374A")
-    )
-    st.altair_chart(ch, use_container_width=True)
-    st.caption("Vikter sluts med 1 dags lag, full återinvestering inom angivna kap-begränsningar.")
-
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Portfölj slutvärde", f"{float(port.iloc[-1]):.2f}x")
-    bh_final = float((bh_raw.reindex(port.index).ffill()).iloc[-1])
-    c2.metric("Buy&Hold slutvärde", f"{bh_final:.2f}x")
-    if idx_raw is not None and len(idx_raw):
-        idx_final = float((idx_raw.reindex(port.index).ffill()).iloc[-1])
-        c3.metric("OMXS30 slutvärde", f"{idx_final:.2f}x")
-    else:
-        c3.metric("OMXS30 slutvärde", "—")
-
-with tab2:
-    st.subheader("Valda profiler")
-    df_sel = pd.DataFrame(rows)
-    st.dataframe(df_sel, use_container_width=True)
-    st.markdown("**Senaste vikter (topp 15):**")
-    last_w = W.iloc[-1].sort_values(ascending=False).head(15)
-    st.dataframe(last_w.to_frame("Vikt").style.format("{:.2%}"), use_container_width=True)
-
-with tab3:
-    st.subheader("Transaktioner per aktie")
-    for t in tickers:
-        with st.expander(f"{t} – transaktioner"):
-            try:
-                params, _, _, _ = load_best_params_for_ticker(t, profiles_dir)
-                trades = run_profile_trades(t, params, start)
-                if len(trades):
-                    st.dataframe(trades, use_container_width=True)
-                    st.download_button(
-                        "Ladda ned CSV",
-                        trades.to_csv(index=False).encode("utf-8"),
-                        file_name=f"{t.replace(':','-')}_trades.csv",
-                        mime="text/csv"
-                    )
-                else:
-                    st.info("Inga affärer i perioden.")
-            except Exception as e:
-                st.error(f"Kunde inte hämta transaktioner: {e}")
-
-# --- EXPOSURE DEBUG BLOCK ---
-# Visar brutto/netto/long/short-exponering samt varnar om brutto > cap_total.
-try:
-    import streamlit as st
-    import pandas as pd
-    import numpy as np
-
-    _can_run = all(name in globals() for name in ["W", "cap_per_asset", "cap_total"])
-    if _can_run:
-        _W = W.copy()  # vikts-matris (tid x tillgångar)
-        gross = _W.abs().sum(axis=1)                   # bruttoexponering
-        long_expo = _W.clip(lower=0).sum(axis=1)       # lång-exponering
-        short_expo = (-_W.clip(upper=0)).sum(axis=1)   # kort-exponering
-        net = _W.sum(axis=1)                            # netto
-
-        eps = 1e-9
-        breach_mask = gross > (cap_total + eps)
-        breach_any = bool(breach_mask.any())
-        breach_date = breach_mask.idxmax() if breach_any else None
-        breach_val  = float(gross.loc[breach_date]) if breach_any else None
-
-        st.subheader("Exponering / kapitalanvändning")
-        c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Max brutto", f"{gross.max():.2f}×")
-        c2.metric("Max netto", f"{net.abs().max():.2f}×")
-        c3.metric("Max long", f"{long_expo.max():.2f}×")
-        c4.metric("Max short", f"{short_expo.max():.2f}×")
-
-        if breach_any:
-            st.error(
-                f"⚠️ Bruttoexponering {breach_val:.2f}× över max {cap_total:.2f}× "
-                f"på {pd.to_datetime(breach_date).date()}"
-            )
-        else:
-            st.success("✅ Ingen bruttoexponering över max – kapitalanvändning OK.")
-    else:
-        st.caption("[exposure] väntar på W/caps (sektionen körs efter att portföljen byggts).")
-except Exception as _ex:
-    try:
-        import streamlit as st
-        st.caption(f"[exposure] {type(_ex).__name__}: {_ex}")
-    except Exception:
-        pass
-# --- END EXPOSURE DEBUG BLOCK ---
-
+    st.info("Välj universum och klicka **🚀 Bygg portfölj**.")

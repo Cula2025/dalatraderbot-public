@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "TELIA – conservative",
+      "ticker": "TELIA",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 24,
+        "rsi_min": 32.82627389045902,
+        "rsi_max": 77.50127602230418,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 95,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 8,
+        "macd_slow": 27,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 26,
+        "bb_nstd": 1.6086601615013216,
+        "bb_min": 0.4892589988541174,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.12911019411448482,
+        "atr_window": 13,
+        "atr_mult": 2.850103399443725,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 1.8047091230623327
+      },
+      "metrics": {
+        "TotalReturn": 0.520744927281521,
+        "MaxDD": -0.20878734966268786,
+        "SharpeD": 0.6937606956495497,
+        "BuyHold": 0.002789400278940146,
+        "CAGR": 0.08766764145342743
+      }
+    },
+    {
+      "name": "TELIA – balanced",
+      "ticker": "TELIA",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 16,
+        "rsi_min": 26.606636958663586,
+        "rsi_max": 72.23882353192377,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 142,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 14,
+        "macd_slow": 20,
+        "macd_signal": 8,
+        "use_bb_filter": true,
+        "bb_window": 22,
+        "bb_nstd": 2.055614498209435,
+        "bb_min": 0.19210292625251868,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.10591751078912318,
+        "atr_window": 17,
+        "atr_mult": 1.7609588173087687,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.065228887901453
+      },
+      "metrics": {
+        "TotalReturn": 0.3087602586765634,
+        "MaxDD": -0.08062210284625049,
+        "SharpeD": 0.8828942892872983,
+        "BuyHold": 0.002789400278940146,
+        "CAGR": 0.055422959194830534
+      }
+    },
+    {
+      "name": "TELIA – aggressive",
+      "ticker": "TELIA",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 27,
+        "rsi_min": 34.508058232436134,
+        "rsi_max": 79.55368642413244,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 70,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 33,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 16,
+        "bb_nstd": 2.026692406225278,
+        "bb_min": 0.4440046606513802,
+        "use_stop_loss": true,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.05206489946089909,
+        "atr_window": 17,
+        "atr_mult": 2.229905092240145,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.208416634532555
+      },
+      "metrics": {
+        "TotalReturn": 0.48392386881862626,
+        "MaxDD": -0.1897625035359325,
+        "SharpeD": 0.636234975890513,
+        "BuyHold": 0.002789400278940146,
+        "CAGR": 0.08233646646845583
+      }
+    }
+  ]
+}

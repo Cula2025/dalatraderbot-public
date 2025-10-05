@@ -1,185 +1,94 @@
-# -*- coding: utf-8 -*-
 from __future__ import annotations
-
-import json
-
-from pathlib import Path
-from typing import Dict, Any, List
-
-import pandas as pd
+import inspect, traceback, os, datetime as dt
+from typing import Any, Optional, Tuple
 import streamlit as st
-from app.btwrap import run_backtest as RUN_BT
 
+# --- trygg debug-import ---
+try:
+    from app.debuglog import log_info, log_warn, log_error, setup_debug_ui
+except Exception:
+    def log_info(*a, **k): pass
+    def log_warn(*a, **k): pass
+    def log_error(*a, **k): pass
+    def setup_debug_ui(*a, **k): pass
 
-# --- helper: build current payload for backtest ---
-def _current_params_payload():
-    ticker = (st.session_state.get("ticker") or "").strip()
-    params = _collect_params_from_state()
-    return {"ticker": ticker, "params": params}
+st.set_page_config(page_title="Backtest", page_icon="🧪", layout="wide")
+st.title("🧪 Backtest")
+setup_debug_ui(st)
 
-
-
-# === Minimal profile loader (runs BEFORE widgets) ===
-from pathlib import Path as _Path
-import json as _json
-
-def _apply_profile_to_session(_prof: dict):
-    # Ticker
-    t = (_prof.get("ticker") or "").strip()
-    if t:
-        st.session_state["ticker"] = t
-    # Params
-    params = _prof.get("params") or {}
-    keymap = {
-        "use_rsi_filter":"use_rsi_filter","rsi_window":"rsi_window","rsi_min":"rsi_min","rsi_max":"rsi_max",
-        "use_trend_filter":"use_trend_filter","trend_ma_type":"trend_ma_type","trend_ma_window":"trend_ma_window",
-        "breakout_lookback":"breakout_lookback","exit_lookback":"exit_lookback",
-        "use_macd_filter":"use_macd_filter","macd_fast":"macd_fast","macd_slow":"macd_slow","macd_signal":"macd_signal",
-        "use_bb_filter":"use_bb_filter","bb_window":"bb_window","bb_nstd":"bb_nstd","bb_min":"bb_min",
-        "use_stop_loss":"use_stop_loss","stop_mode":"stop_mode","stop_loss_pct":"stop_loss_pct",
-        "atr_window":"atr_window","atr_mult":"atr_mult",
-        "use_atr_trailing":"use_atr_trailing","atr_trail_mult":"atr_trail_mult",
-        # datum kan ligga både i rot och i params i dina filer – kolla båda
-    }
-    for s_key, d_key in keymap.items():
-        if s_key in params:
-            st.session_state[d_key] = params[s_key]
-
-    # Datum (fallbacks)
-    fd = params.get("from_date") or _prof.get("from_date") or _prof.get("start") or ""
-    td = params.get("to_date")   or _prof.get("to_date")   or _prof.get("end")   or ""
-    if fd: st.session_state["from_date"] = str(fd)
-    if td: st.session_state["to_date"]   = str(td)
-
-# UI: välj fil & profil (vänsterspalt)
-with st.sidebar.expander("Ladda profil", expanded=True):
-    base_dir = _Path("/srv/trader/app/profiles") if _Path("/srv/trader/app/profiles").exists() else _Path.cwd() / "profiles"
-    files = sorted([fp for fp in base_dir.glob("*.json") if fp.is_file()], key=lambda x: x.name.lower())
-    file_names = [f.name for f in files]
-    file_idx = st.selectbox("Profilfil", options=range(len(file_names)) if file_names else [], format_func=lambda i: file_names[i], key="__prof_file_idx__")
-
-    profiles = []
-    if files:
-        try:
-            with open(files[file_idx], "r", encoding="utf-8") as _f:
-                data = _json.load(_f)
-            profiles = data.get("profiles", [])
-        except Exception as _e:
-            st.warning(f"Kunde inte läsa {files[file_idx].name}: {type(_e).__name__}: {_e}")
-
-    def _label(i: int) -> str:
-        p = profiles[i]
-        t = (p.get("ticker") or "").strip()
-        n = p.get("name") or p.get("profile") or f"Profil {i+1}"
-        return f"{t} – {n}" if t else n
-
-    prof_idx = st.selectbox("Välj profil", options=range(len(profiles)) if profiles else [], format_func=_label, key="__prof_idx__")
-
-    if st.button("✅ Använd i Backtest", use_container_width=True):
-        if profiles:
-            _apply_profile_to_session(profiles[prof_idx])
-            st.rerun()
-# --- helper: collect params from session (dict for backtest) ---
-def _collect_params_from_state():
-    s = st.session_state
-    keys = [
-        "from_date","to_date",
-        "use_rsi_filter","rsi_window","rsi_min","rsi_max",
-        "use_trend_filter","trend_ma_type","trend_ma_window",
-        "breakout_lookback","exit_lookback",
-        "use_macd_filter","macd_fast","macd_slow","macd_signal",
-        "use_bb_filter","bb_window","bb_nstd","bb_min",
-        "use_stop_loss","stop_mode","stop_loss_pct",
-        "atr_window","atr_mult",
-        "use_atr_trailing","atr_trail_mult",
+def _detect_engine() -> Tuple[Optional[Any], str]:
+    candidates = [
+        ("app.backtest", "run_backtest"),
+        ("app.backtest", "run"),
+        ("app.engine", "run_backtest"),
+        ("app.backtester", "run_single"),
     ]
-    params = {}
-    for k in keys:
-        if k in s:
-            params[k] = s[k]
-    # datum-fallbacks om UI använder andra nycklar
-    if not params.get("from_date") and "start" in s:
-        params["from_date"] = s["start"]
-    if not params.get("to_date") and "end" in s:
-        params["to_date"] = s["end"]
-    return params
+    for mod, attr in candidates:
+        try:
+            m = __import__(mod, fromlist=[attr])
+            fn = getattr(m, attr, None)
+            if callable(fn):
+                return fn, f"{mod}.{attr}"
+        except Exception:
+            continue
+    return None, ""
 
-# --- DEBUG START ---
+ENGINE_FN, ENGINE_NAME = _detect_engine()
+st.caption(f"Motor: {'—' if ENGINE_FN is None else ENGINE_NAME}")
 
+# --- ticker-widget utan varningsspam ---
+if "ticker" not in st.session_state:
+    st.session_state["ticker"] = "GETI B"
+ticker = st.text_input("Ticker", key="ticker")
 
-with st.sidebar.expander("DEBUG payload", expanded=False):
+run_btn = st.button("Kör backtest")
+
+def _call_engine(fn, ticker: str):
+    """Anropa motorn tolerant: stöd ticker som kw eller positionellt."""
     try:
-        payload = _current_params_payload()
-        st.json(payload)
-    except Exception as e:
-        import traceback
-        st.write("DEBUG payload misslyckades:", type(e).__name__, str(e))
-        st.code(traceback.format_exc())
-
-
-# --- MINIMAL RUN (auto/backtest+render) ---
-# Bygger och visar resultat – samt fel – i högerkolumnen.
-# Kör antingen när du trycker 'Kör backtest' eller auto om ticker+params finns.
-
-def _nice(x):
-    try:
-        return float(x)
-    except Exception:
-        return x
-
-# layout
-col_left, col_right = st.columns([1, 2], gap="large")
-
-with col_left:
-    payload = _current_params_payload()
-    tkr = (payload.get("ticker") or "").strip()
-    st.text_input("Ticker", key="ticker", value=tkr)  # visar vad som ligger i state
-    do_run = st.button("Kör backtest", use_container_width=True)
-
-with col_right:
-    try:
-        payload = _current_params_payload()
-        tkr = (payload.get("ticker") or '').strip()
-        params = payload.get("params") or {}
-
-        # krav för körning
-        ready = bool(tkr) and bool(params)
-        if not ready and do_run:
-            st.warning("Ange ticker och parametrar först (ex via profil-laddaren).")
-
-        if ready and (do_run or st.session_state.get("__autorun__", True)):
-            res = RUN_BT(payload)   # <-- KÖR BACKTESTEN
-            # Visa sammanfattning
-            summ = res.get("summary", {})
-            st.subheader("Resultat")
-            st.write({
-                "TotalReturn": _nice(summ.get("TotalReturn")),
-                "SharpeD":     _nice(summ.get("SharpeD")),
-                "MaxDD":       _nice(summ.get("MaxDD")),
-                "BuyHold":     _nice(summ.get("BuyHold")),
-                "FinalEquity": _nice(summ.get("FinalEquity")),
-                "Trades":      _nice(summ.get("Trades")),
-                "Bars":        _nice(summ.get("Bars")),
-            })
-
-            # Equity-kurva (visa de sista raderna)
-            eq = res.get("equity")
-            if hasattr(eq, "tail"):
-                st.caption("Equity (sista 10 rader)")
-                st.dataframe(eq.tail(10), use_container_width=True, hide_index=True)
-
-            # Trades (visa de sista raderna)
-            tr = res.get("trades")
-            if hasattr(tr, "tail"):
-                st.caption("Trades (sista 10)")
-                try:
-                    st.dataframe(tr.tail(10), use_container_width=True, hide_index=True)
-                except Exception:
-                    st.write(tr.tail(10))
+        sig = inspect.signature(fn)
+        params = {p.name for p in sig.parameters.values()}
+        if "ticker" in params:
+            return fn(ticker=ticker)
+        elif "symbol" in params:
+            return fn(symbol=ticker)
+        elif "code" in params:
+            return fn(code=ticker)
         else:
-            st.info("Klar för körning. Välj profil → 'Använd i Backtest' i vänstern, sedan 'Kör backtest'.")
-    except Exception as _e:
-        import traceback
-        st.error(f"Backtest felade: {type(_e).__name__}: {_e}")
-        st.code(traceback.format_exc())
-# --- /MINIMAL RUN ---
+            return fn(ticker)  # positionellt
+    except Exception as e:
+        log_error(f"Engine call failed: {e}\n{traceback.format_exc()}")
+        return {"error": str(e), "trace": traceback.format_exc()}
+
+if run_btn:
+    if ENGINE_FN is None:
+        st.error("Ingen backtest-motor hittad i appen.")
+        st.stop()
+
+    with st.spinner(f"Kör backtest för {ticker}…"):
+        res = _call_engine(ENGINE_FN, ticker)
+
+    # Normalisera None → {}
+    if res is None:
+        st.warning("Backtest gav inget resultat (res=None). Kontrollera datakälla/nyckel.")
+        res = {}
+
+    summary = (res or {}).get("summary", {})
+    if isinstance(summary, dict) and summary:
+        st.subheader("Sammanfattning")
+        for k, v in summary.items():
+            st.write(f"- **{k}**: {v}")
+
+    st.subheader("Rått resultat")
+    try:
+        out_dir = "trader/outputs"
+        os.makedirs(out_dir, exist_ok=True)
+        ts = dt.datetime.now().strftime("%Y%m%d_%H%M%S")
+        out_path = os.path.join(out_dir, f"backtest_{ticker}_{ts}.json")
+        import json
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(res, f, ensure_ascii=False, indent=2)
+        st.caption(f"Sparat: `{out_path}`")
+    except Exception:
+        pass
+    st.json(res, expanded=False)

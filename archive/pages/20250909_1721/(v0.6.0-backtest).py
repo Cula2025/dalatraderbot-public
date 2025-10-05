@@ -332,14 +332,14 @@ def plot_price_with_signals(df: pd.DataFrame, title: str, last_n: int = 300,
         margin=dict(l=10, r=10, t=30, b=10),
         xaxis_rangeslider_visible=False,
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 def plot_equity(equity: pd.Series):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=equity.index, y=equity.values, mode="lines", name="Equity"))
     fig.update_layout(title="Kapital-/Equity-kurva", height=300, margin=dict(l=10, r=10, t=30, b=10))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 
 # -----------------------------
@@ -382,7 +382,7 @@ with st.sidebar:
     last_n = st.slider("Visa sista N dagar i graf", 100, 1000, 300, 50)
     table_rows = st.slider("Rader i transaktions-/datatabeller", 50, 5000, 500, 50)
 
-    run_btn = st.button("ðŸš€ KÃ¶r backtest", type="primary", use_container_width=True)
+    run_btn = st.button("ðŸš€ KÃ¶r backtest", type="primary", width='stretch')
 
 # Diagnostik
 with st.expander("ðŸ”Ž Diagnostik", expanded=False):
@@ -469,13 +469,13 @@ if run_btn:
         tview = trades_df.copy()
         tview["pnl_%"] = (tview["pnl_pct"] * 100).round(2)
         tview = tview[["entry_date","entry_price","exit_date","exit_price","bars_held","reason","pnl_%"]]
-        st.dataframe(tview.tail(table_rows), use_container_width=True)
+        st.dataframe(tview.tail(table_rows), width='stretch')
         csv = trades_df.to_csv(index=False).encode("utf-8")
-        st.download_button("ðŸ’¾ Ladda ner affÃ¤rer (CSV)", data=csv, file_name=f"{ticker}_trades.csv", mime="text/csv", use_container_width=True)
+        st.download_button("ðŸ’¾ Ladda ner affÃ¤rer (CSV)", data=csv, file_name=f"{ticker}_trades.csv", mime="text/csv", width='stretch')
 
     st.subheader("Data (med indikatorer & signaler)")
     view = edf[["Open","High","Low","Close","Volume","SMA50","SMA200","RSI","RSI_MA","MACD_hist","BUY","SELL"]].tail(table_rows)
-    st.dataframe(view, use_container_width=True)
+    st.dataframe(view, width='stretch')
 
 else:
     st.info("StÃ¤ll in parametrar och klicka **KÃ¶r backtest**.")

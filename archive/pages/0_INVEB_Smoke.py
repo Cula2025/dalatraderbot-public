@@ -44,7 +44,7 @@ col1,col2 = st.columns(2)
 with col1: start_date = st.date_input("Fr�n", value=today - dt.timedelta(days=365*5))
 with col2: end_date   = st.date_input("Till", value=today)
 
-run = st.button("?? K�r INVE B", use_container_width=True)
+run = st.button("?? K�r INVE B", width='stretch')
 if not run: st.stop()
 
 # ---- Data ----
@@ -142,7 +142,7 @@ else:
 st.subheader("Trades")
 if isinstance(trades, pd.DataFrame) and not trades.empty:
     cols = [c for c in ["EntryTime","EntryPrice","ExitTime","ExitPrice","PnL","reason"] if c in trades.columns]
-    st.dataframe(trades[cols].sort_values("ExitTime", ascending=False), use_container_width=True)
+    st.dataframe(trades[cols].sort_values("ExitTime", ascending=False), width='stretch')
 else:
     st.caption("Inga aff�rer i perioden eller tabell saknas.")
 

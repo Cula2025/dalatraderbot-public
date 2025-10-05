@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "SAND – conservative",
+      "ticker": "SAND",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 11,
+        "rsi_min": 25.82491460503715,
+        "rsi_max": 63.48987113383981,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 66,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 11,
+        "macd_slow": 28,
+        "macd_signal": 10,
+        "use_bb_filter": false,
+        "bb_window": 28,
+        "bb_nstd": 1.8588880406761081,
+        "bb_min": 0.25617069484147137,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.14496381476363857,
+        "atr_window": 13,
+        "atr_mult": 2.971742481645431,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 1.7119337855405667
+      },
+      "metrics": {
+        "TotalReturn": 1.2863295287374412,
+        "MaxDD": -0.13286441476657118,
+        "SharpeD": 1.0734671967299605,
+        "BuyHold": 0.4660221779926075,
+        "CAGR": 0.18020056409140683
+      }
+    },
+    {
+      "name": "SAND – balanced",
+      "ticker": "SAND",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 11,
+        "rsi_min": 31.3297292564408,
+        "rsi_max": 64.65554099622697,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 127,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 36,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 17,
+        "bb_nstd": 2.3946772556249805,
+        "bb_min": 0.2974051064322183,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.11311971498238793,
+        "atr_window": 15,
+        "atr_mult": 1.7423754396499218,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.3236134139083995
+      },
+      "metrics": {
+        "TotalReturn": 1.4943373786967533,
+        "MaxDD": -0.16931093224754368,
+        "SharpeD": 1.0804572674574113,
+        "BuyHold": 0.4660221779926075,
+        "CAGR": 0.20097115158370804
+      }
+    },
+    {
+      "name": "SAND – aggressive",
+      "ticker": "SAND",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 11,
+        "rsi_min": 25.393022785255674,
+        "rsi_max": 60.91695161346333,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 109,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 20,
+        "macd_signal": 8,
+        "use_bb_filter": false,
+        "bb_window": 15,
+        "bb_nstd": 2.0318431755513138,
+        "bb_min": 0.3600863830809703,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.10011132126460097,
+        "atr_window": 19,
+        "atr_mult": 1.950029441685824,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.434256546272188
+      },
+      "metrics": {
+        "TotalReturn": 1.157721122274658,
+        "MaxDD": -0.184317780106949,
+        "SharpeD": 1.0038798732259644,
+        "BuyHold": 0.4660221779926075,
+        "CAGR": 0.16658973405355892
+      }
+    }
+  ]
+}

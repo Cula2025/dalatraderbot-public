@@ -1,32 +1,26 @@
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.cache/
-.mypy_cache/
-.pytest_cache/
-
-# Envs & lokala saker
+# venv & python cache
 .venv/
-env/
-.venv*/
-venv*/
-*.env
-*.env.*
-/etc/dalatrader.env
+**/__pycache__/
+*.py[cod]
+*.so
 
-# Streamlit & lokalt
-.streamlit/
+# lokala/temporära filer
 *.log
+*.tmp
+*.DS_Store
+.ipynb_checkpoints/
 
-# Data/outputs
-outputs/
+# hemligheter & miljö
+.env
+.secrets
+.streamlit/secrets.toml
+app/keys*
+app/*secret*
+app/*token*
+**/*apikey*
+**/*api_key*
+
+# data/output/cacher (behövs ej i repo)
+trader/outputs/
 data/
-
-# OS/editor
-.DS_Store
-Thumbs.db
-.vscode/
-.idea/
-storage/
-storage/*.db
+cache/

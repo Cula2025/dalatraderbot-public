@@ -171,7 +171,7 @@ if run:
     # 5) Trades
     st.subheader("Transaktioner")
     if isinstance(trades, pd.DataFrame) and len(trades):
-        st.dataframe(trades, use_container_width=True)
+        st.dataframe(trades, width='stretch')
         st.download_button(
             "Ladda ned trades (CSV)",
             trades.to_csv(index=False).encode("utf-8"),
@@ -390,7 +390,7 @@ if start_btn:
     try:
         dfres = pd.DataFrame(rows).sort_values("score", ascending=False).head(25)
         st.markdown("**Top 25 kandidater**")
-        st.dataframe(dfres, use_container_width=True)
+        st.dataframe(dfres, width='stretch')
     except Exception:
         pass
 

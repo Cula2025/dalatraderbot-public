@@ -169,7 +169,7 @@ with left:
     st.divider()
     fname_default = f"{st.session_state['pf_name']}.json"
     fname = st.text_input("Spara som (storage/portfolios/…)", value=fname_default, key="pf_save_name")
-    if st.button("💾 Spara portfölj", use_container_width=True):
+    if st.button("💾 Spara portfölj", width='stretch'):
         payload = {
             "name": st.session_state["pf_name"],
             "source": st.session_state["pf_source"],
@@ -191,7 +191,7 @@ with left:
         )
         st.success(f"Sparat → `storage/portfolios/{st.session_state['pf_save_name']}`")
 
-    run_btn = st.button("🚀 Kör portfölj", use_container_width=True)
+    run_btn = st.button("🚀 Kör portfölj", width='stretch')
 
 with right:
     st.subheader("Resultat")
@@ -265,7 +265,7 @@ with right:
             plt.title("Equity (normaliserad)"); plt.xlabel("Datum"); plt.ylabel("Index 1.0")
             st.pyplot(fig, clear_figure=True)
         if not trades.empty:
-            st.dataframe(trades, use_container_width=True, hide_index=True)
+            st.dataframe(trades, width='stretch', hide_index=True)
 
 
 

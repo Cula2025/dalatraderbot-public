@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "SWED A – conservative",
+      "ticker": "SWED A",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 9,
+        "rsi_min": 31.112012723361364,
+        "rsi_max": 79.66886616734871,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 138,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 27,
+        "macd_signal": 11,
+        "use_bb_filter": false,
+        "bb_window": 23,
+        "bb_nstd": 2.4609980006063608,
+        "bb_min": 0.4726402394833913,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.13744861816648105,
+        "atr_window": 11,
+        "atr_mult": 1.9997723477930558,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 3.012900938303157
+      },
+      "metrics": {
+        "TotalReturn": 1.547629746583353,
+        "MaxDD": -0.1468378654202951,
+        "SharpeD": 1.1438737533479022,
+        "BuyHold": 0.9813470027053965,
+        "CAGR": 0.20619280364173154
+      }
+    },
+    {
+      "name": "SWED A – balanced",
+      "ticker": "SWED A",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 8,
+        "rsi_min": 27.68351214599094,
+        "rsi_max": 61.95240085831331,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 138,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 34,
+        "macd_signal": 6,
+        "use_bb_filter": false,
+        "bb_window": 25,
+        "bb_nstd": 2.473531344810717,
+        "bb_min": 0.11442246754259484,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.06822586576877714,
+        "atr_window": 16,
+        "atr_mult": 2.105713081679283,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.1309021212979706
+      },
+      "metrics": {
+        "TotalReturn": 1.6941639845580765,
+        "MaxDD": -0.14227279921341152,
+        "SharpeD": 1.514629641385951,
+        "BuyHold": 0.9813470027053965,
+        "CAGR": 0.2197915115121527
+      }
+    },
+    {
+      "name": "SWED A – aggressive",
+      "ticker": "SWED A",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 8,
+        "rsi_min": 18.59271754439761,
+        "rsi_max": 57.659889622553166,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 105,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 27,
+        "macd_signal": 10,
+        "use_bb_filter": false,
+        "bb_window": 15,
+        "bb_nstd": 2.0653079273313035,
+        "bb_min": 0.49240111314050994,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.1376821499315522,
+        "atr_window": 15,
+        "atr_mult": 2.059616821333856,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.9898587754454713
+      },
+      "metrics": {
+        "TotalReturn": 1.81214549686322,
+        "MaxDD": -0.11060501229530706,
+        "SharpeD": 1.6531478167155589,
+        "BuyHold": 0.9813470027053965,
+        "CAGR": 0.23031705001739122
+      }
+    }
+  ]
+}

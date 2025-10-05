@@ -100,4 +100,4 @@ st.caption("Beräkning: dagliga logikvikter med 1 dags lag; återinvesterar inom
 
 # Snabbtabell sista värden
 last = chart.dropna().iloc[-1:].T.rename(columns={chart.index[-1]: "Sista värde"})
-st.dataframe(last, use_container_width=True)
+st.dataframe(last, width='stretch')

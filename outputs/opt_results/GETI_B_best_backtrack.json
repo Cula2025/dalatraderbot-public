@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "GETI B – conservative",
+      "ticker": "GETI B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 27,
+        "rsi_min": 28.02544333339333,
+        "rsi_max": 79.30339935554844,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 73,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 24,
+        "macd_signal": 11,
+        "use_bb_filter": true,
+        "bb_window": 21,
+        "bb_nstd": 2.096463508326132,
+        "bb_min": 0.4068231650858699,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.1390682916276768,
+        "atr_window": 12,
+        "atr_mult": 1.5505210444056814,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 3.2744851420823897
+      },
+      "metrics": {
+        "TotalReturn": 0.44188110743786035,
+        "MaxDD": -0.06606822262118484,
+        "SharpeD": 0.7683293873038971,
+        "BuyHold": -0.19848334981866145,
+        "CAGR": 0.0760750388161946
+      }
+    },
+    {
+      "name": "GETI B – balanced",
+      "ticker": "GETI B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 17,
+        "rsi_min": 13.135505625866644,
+        "rsi_max": 73.74779953515538,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 177,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 9,
+        "macd_slow": 21,
+        "macd_signal": 12,
+        "use_bb_filter": false,
+        "bb_window": 26,
+        "bb_nstd": 1.6063627174164878,
+        "bb_min": 0.481774412462067,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.05759923789417881,
+        "atr_window": 12,
+        "atr_mult": 2.713575411443094,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.6467978119403703
+      },
+      "metrics": {
+        "TotalReturn": 0.3821422397587766,
+        "MaxDD": -0.108986790110559,
+        "SharpeD": 0.772984491334492,
+        "BuyHold": -0.19848334981866145,
+        "CAGR": 0.066990770390853
+      }
+    },
+    {
+      "name": "GETI B – aggressive",
+      "ticker": "GETI B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 15,
+        "rsi_min": 10.348939521171237,
+        "rsi_max": 76.41408244007494,
+        "use_trend_filter": true,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 118,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 13,
+        "macd_slow": 21,
+        "macd_signal": 10,
+        "use_bb_filter": false,
+        "bb_window": 19,
+        "bb_nstd": 2.235323869866922,
+        "bb_min": 0.4204115955131338,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.08063022928598201,
+        "atr_window": 10,
+        "atr_mult": 1.8725562878128903,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 1.5108633449565663
+      },
+      "metrics": {
+        "TotalReturn": 0.38548839008319713,
+        "MaxDD": -0.08438061041292633,
+        "SharpeD": 0.8987063290590691,
+        "BuyHold": -0.19848334981866145,
+        "CAGR": 0.06750782564035718
+      }
+    }
+  ]
+}

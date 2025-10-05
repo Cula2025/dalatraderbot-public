@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "TEL2 B – conservative",
+      "ticker": "TEL2 B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 23,
+        "rsi_min": 34.42754615080037,
+        "rsi_max": 84.93084742647494,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 66,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 9,
+        "macd_slow": 26,
+        "macd_signal": 7,
+        "use_bb_filter": false,
+        "bb_window": 25,
+        "bb_nstd": 1.8742553019371004,
+        "bb_min": 0.33981966504317573,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.05461951923600016,
+        "atr_window": 19,
+        "atr_mult": 2.3809888085995112,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.0883654920695394
+      },
+      "metrics": {
+        "TotalReturn": 0.7765016351092644,
+        "MaxDD": -0.21598914758481458,
+        "SharpeD": 0.794376707931728,
+        "BuyHold": 0.2652487961476726,
+        "CAGR": 0.12209479991361816
+      }
+    },
+    {
+      "name": "TEL2 B – balanced",
+      "ticker": "TEL2 B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 22,
+        "rsi_min": 34.35326317451386,
+        "rsi_max": 83.78927698844126,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 90,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 30,
+        "macd_signal": 10,
+        "use_bb_filter": false,
+        "bb_window": 16,
+        "bb_nstd": 1.8515290867033722,
+        "bb_min": 0.12499366728414696,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.12737263353710238,
+        "atr_window": 17,
+        "atr_mult": 1.8078686907625463,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 3.2601600026157946
+      },
+      "metrics": {
+        "TotalReturn": 0.7072221174589239,
+        "MaxDD": -0.2893883241954237,
+        "SharpeD": 0.7162532973442912,
+        "BuyHold": 0.2652487961476726,
+        "CAGR": 0.11318250874165847
+      }
+    },
+    {
+      "name": "TEL2 B – aggressive",
+      "ticker": "TEL2 B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 16,
+        "rsi_min": 31.682871928271563,
+        "rsi_max": 68.91978920941077,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 94,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": true,
+        "macd_fast": 8,
+        "macd_slow": 31,
+        "macd_signal": 6,
+        "use_bb_filter": false,
+        "bb_window": 21,
+        "bb_nstd": 1.9911897497091495,
+        "bb_min": 0.2299748035778888,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.07897918830071411,
+        "atr_window": 15,
+        "atr_mult": 2.6462005524330126,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.9929421731321613
+      },
+      "metrics": {
+        "TotalReturn": 0.9111886535478639,
+        "MaxDD": -0.18398205930216083,
+        "SharpeD": 1.1478998390618005,
+        "BuyHold": 0.2652487961476726,
+        "CAGR": 0.13865444408319938
+      }
+    }
+  ]
+}

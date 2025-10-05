@@ -179,12 +179,12 @@ def plot_price(df: pd.DataFrame, last_n:int=300, entries:Optional[pd.DataFrame]=
         fig.add_trace(go.Scatter(x=x2["exit_date"], y=[df.loc[d,"High"] for d in x2["exit_date"]],
                                  mode="markers", name="SÄLJ", marker_symbol="triangle-down", marker_size=12), row=1,col=1)
     fig.update_layout(title=title, height=820, margin=dict(l=10,r=10,t=30,b=10), xaxis_rangeslider_visible=False)
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 def plot_equity(eq: pd.Series):
     fig=go.Figure(); fig.add_trace(go.Scatter(x=eq.index,y=eq.values,mode="lines",name="Equity"))
     fig.update_layout(title="Kapital-/Equity-kurva", height=300, margin=dict(l=10,r=10,t=30,b=10))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width='stretch')
 
 # ---------- UI ----------
 st.set_page_config(page_title=f"Tradbot {APP_VERSION}", layout="wide")
@@ -198,7 +198,7 @@ with st.sidebar:
     st.divider(); st.header("Gemensamt")
     ticker_in = st.text_input("Ticker", value="HM B")
     start_dt = st.date_input("Startdatum", value=date(2020,1,1))
-    if st.button("🧹 Rensa cache", use_container_width=True):
+    if st.button("🧹 Rensa cache", width='stretch'):
         st.cache_data.clear(); st.success("Cache rensad.")
 
 # ---- OHLCV ----
@@ -217,7 +217,7 @@ if view=="OHLCV":
         with c3: st.metric("Sista datum", _fmt_dt(df.index.max()))
         with c4: st.metric("Senaste Close", f"{df['Close'].dropna().iloc[-1]:,.2f}".replace(","," "))
         plot_price(df, last_n=300, title=f"{ticker_in} – pris/volym")
-        st.dataframe(df.tail(500), use_container_width=True)
+        st.dataframe(df.tail(500), width='stretch')
 
 # ---- Backtest ----
 else:
@@ -247,14 +247,14 @@ else:
         last_n = st.slider("Visa sista N dagar i graf", 100, 1000, 300, 50)
         table_rows = st.slider("Rader i tabeller", 50, 5000, 500, 50)
 
-        if st.button("🔧 Demo-parametrar (skapa affärer)", use_container_width=True):
+        if st.button("🔧 Demo-parametrar (skapa affärer)", width='stretch'):
             st.session_state.update({
                 "RSI":50,"RSI_LEN":14,"RSI_MA":5,"RSI_ABOVE":True,"SMA50_200":False,"SMA200_UP":False,
                 "MACD_POS":True,"MACD_POS_YDAY":False,"SELL_SMA50":True,"SELL_MACD":False,
                 "USE_RSI_SELL":False,"STOP":8,"MAX_HOLD":60
             }); st.success("Demo-parametrar satta. Kör backtest ↘"); 
 
-        run = st.button("🚀 Kör backtest", type="primary", use_container_width=True)
+        run = st.button("🚀 Kör backtest", type="primary", width='stretch')
 
     if run:
         start_str = start_dt.strftime("%Y-%m-%d")
@@ -293,10 +293,10 @@ else:
                 st.warning("Inga affärer – lätta på filterna eller klicka **Demo-parametrar**.")
             else:
                 v=trades.copy(); v["pnl_%"]=(v["pnl_pct"]*100).round(2)
-                st.dataframe(v[["entry_date","entry_price","exit_date","exit_price","bars_held","reason","pnl_%"]].tail(table_rows), use_container_width=True)
+                st.dataframe(v[["entry_date","entry_price","exit_date","exit_price","bars_held","reason","pnl_%"]].tail(table_rows), width='stretch')
                 st.download_button("💾 Ladda ner affärer (CSV)", data=trades.to_csv(index=False).encode("utf-8"),
                                    file_name=f"{normalize_ticker_for_bd(ticker_in)}_trades.csv", mime="text/csv",
-                                   use_container_width=True)
+                                   width='stretch')
     else:
         st.info("Ställ in parametrar och klicka **Kör backtest**.")
 

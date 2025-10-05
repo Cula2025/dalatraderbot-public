@@ -226,7 +226,7 @@ if run_btn:
             st.json(nice)
 
             with st.expander("Visa topplista"):
-                st.dataframe(df_ok.reset_index(drop=True), use_container_width=True)
+                st.dataframe(df_ok.reset_index(drop=True), width='stretch')
 
             if st.button(f"✅ Använd bästa för {name}", key=f"apply_{name}"):
                 bt_keys = set(BASE_KEYS.keys()) | set(grid.keys()) | {"from_date","to_date"}
@@ -239,7 +239,7 @@ if run_btn:
                 st.success("Applicerat till session. Gå till Backtest för att köra.")
         else:
             st.warning("Alla körningar felade – se tabellen nedan för felorsaker.")
-            st.dataframe(pd.DataFrame(rows), use_container_width=True)
+            st.dataframe(pd.DataFrame(rows), width='stretch')
 
 st.markdown("---")
 st.caption("Tips: börja med små gridar. När det ser rimligt ut kan du bredda intervallen.")

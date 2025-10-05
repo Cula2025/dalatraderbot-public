@@ -268,7 +268,7 @@ status = {
 st.json(status)
 
 # ---------- RUN ----------
-run = st.button("Run", use_container_width=True)
+run = st.button("Run", width='stretch')
 if not run:
     st.info("Click Run to start the backtest. Choose profile/file in the sidebar (optional).")
     st.stop()
@@ -384,7 +384,7 @@ try:
         mid  = base.mark_line(strokeDash=[4,3]).encode(y="BB_mid:Q")
         layers = [band, mid] + layers
     chart = alt.layer(*layers).properties(height=280)
-    st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, width='stretch')
 except Exception:
     st.line_chart(_plot.set_index("Date"))
 
@@ -528,6 +528,6 @@ with c4:
 st.subheader("Trades")
 if isinstance(trades, pd.DataFrame) and not trades.empty:
     cols = [c for c in ["EntryTime","EntryPrice","ExitTime","ExitPrice","PnL","reason"] if c in trades.columns]
-    st.dataframe(trades[cols].sort_values("ExitTime", ascending=False), use_container_width=True)
+    st.dataframe(trades[cols].sort_values("ExitTime", ascending=False), width='stretch')
 else:
     st.caption("No trades in period.")

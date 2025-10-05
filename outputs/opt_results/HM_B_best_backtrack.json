@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "HM B – conservative",
+      "ticker": "HM B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 8,
+        "rsi_min": 28.41863458486087,
+        "rsi_max": 70.00574877754869,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 177,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 28,
+        "macd_signal": 7,
+        "use_bb_filter": true,
+        "bb_window": 15,
+        "bb_nstd": 2.0866965331469753,
+        "bb_min": 0.4450620056021847,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.07596719722983433,
+        "atr_window": 12,
+        "atr_mult": 2.2152853110066566,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.9991583501889307
+      },
+      "metrics": {
+        "TotalReturn": 1.9402026129111998,
+        "MaxDD": -0.17927451894819346,
+        "SharpeD": 1.0905864042968632,
+        "BuyHold": 0.02420168067226891,
+        "CAGR": 0.24120196411756045
+      }
+    },
+    {
+      "name": "HM B – balanced",
+      "ticker": "HM B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 8,
+        "rsi_min": 28.19125813846256,
+        "rsi_max": 73.56601254083618,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 125,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 33,
+        "macd_signal": 9,
+        "use_bb_filter": true,
+        "bb_window": 16,
+        "bb_nstd": 1.7497141177042816,
+        "bb_min": 0.39795262550696386,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.05935593074040938,
+        "atr_window": 12,
+        "atr_mult": 2.7540538342803895,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 1.7365342015059595
+      },
+      "metrics": {
+        "TotalReturn": 1.1421691265970102,
+        "MaxDD": -0.23203573804730382,
+        "SharpeD": 0.8559211053561935,
+        "BuyHold": 0.02420168067226891,
+        "CAGR": 0.16490019718172366
+      }
+    },
+    {
+      "name": "HM B – aggressive",
+      "ticker": "HM B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 8,
+        "rsi_min": 21.96223405523559,
+        "rsi_max": 77.66647209374486,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 106,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 14,
+        "macd_slow": 20,
+        "macd_signal": 8,
+        "use_bb_filter": true,
+        "bb_window": 21,
+        "bb_nstd": 1.9611330137264376,
+        "bb_min": 0.3052312909125857,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.14682652756983736,
+        "atr_window": 14,
+        "atr_mult": 1.6490668613118458,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 1.57428242886618
+      },
+      "metrics": {
+        "TotalReturn": 1.4086774564303104,
+        "MaxDD": -0.19505745563076649,
+        "SharpeD": 0.9848659239895029,
+        "BuyHold": 0.02420168067226891,
+        "CAGR": 0.1925918983630337
+      }
+    }
+  ]
+}

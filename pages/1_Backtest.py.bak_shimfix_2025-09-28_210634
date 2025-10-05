@@ -234,7 +234,7 @@ if files:
             format_func=lambda i: f"{profiles[i]['ticker'] or ''} – {profiles[i]['name']}",
             key="back_prof_idx",
         )
-        if st.sidebar.button("Använd vald profil", type="primary", use_container_width=True):
+        if st.sidebar.button("Använd vald profil", type="primary", width='stretch'):
             _apply_profile_to_state(profiles[prof_idx])
             st.sidebar.success("Profil applicerad till parametrarna.")
 else:
@@ -333,7 +333,7 @@ def _simple_metrics_from_equity(equity: pd.Series) -> Dict[str, float]:
     return {"TotalReturn": total, "CAGR": cagr, "SharpeD": sharpe_d, "MaxDD": dd}
 
 col_run, col_save = st.columns([1,1])
-if col_run.button("Kör backtest", type="primary", use_container_width=True):
+if col_run.button("Kör backtest", type="primary", width='stretch'):
     ticker = _normalize_ticker(st.session_state.get("ticker", ""))
     params = _collect_params_from_state()
     start = _coerce_date(st.session_state.get("from_date", DEFAULTS["from_date"]))
@@ -382,7 +382,7 @@ def _current_params_payload() -> Dict[str, Any]:
     }
 
 payload = _current_params_payload()
-if col_save.button("Spara som TMP", use_container_width=True):
+if col_save.button("Spara som TMP", width='stretch'):
     try:
         t = payload["profiles"][0]["ticker"]
         base = t.replace(".ST", "").replace(" ", "_")

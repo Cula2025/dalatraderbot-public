@@ -1,71 +1,49 @@
-# -*- coding: utf-8 -*-
-# Enkel, återanvändbar debug-logg för Streamlit + journald
-import datetime as _dt
+from __future__ import annotations
+import logging, os, datetime as dt
+from typing import Optional
 
-try:
-    import streamlit as st
-except Exception:
-    st = None
+_LOG_PATH = os.getenv("TRADER_UI_LOG", "/srv/trader/app/logs/ui.log")
+os.makedirs(os.path.dirname(_LOG_PATH), exist_ok=True)
 
-DEBUG_KEY = "debug_enabled"           # vår nya nyckel
-COMPAT_KEYS = ("backtest_debug",)     # äldre nycklar vi respekterar
+_logger: Optional[logging.Logger] = None
+def _get_logger() -> logging.Logger:
+    global _logger
+    if _logger is not None:
+        return _logger
+    logger = logging.getLogger("ui")
+    logger.setLevel(logging.INFO)
+    if not any(getattr(h, "baseFilename", None) == os.path.abspath(_LOG_PATH) for h in logger.handlers):
+        fh = logging.FileHandler(_LOG_PATH, encoding="utf-8")
+        fh.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s"))
+        logger.addHandler(fh)
+    _logger = logger
+    return logger
 
-def setup_debug_ui(page_title: str = "") -> bool:
-    """Rita debug-UI i sidopanelen och returnera om debug är aktivt."""
-    if st is None:
-        return False
-    st.sidebar.subheader("🛠️ Debug")
-    default = False
-    for k in (DEBUG_KEY,) + COMPAT_KEYS:
-        default = default or bool(st.session_state.get(k, False))
-    enabled = st.sidebar.checkbox("Debug 0.2", value=default or True, key=DEBUG_KEY)
-    # håll kompatibilitetsnycklar i fas
-    for k in COMPAT_KEYS:
-        st.session_state[k] = enabled
-    if page_title:
-        st.sidebar.caption(f"Sida: {page_title}")
-    return enabled
+def log_info(msg: str) -> None: _get_logger().info(msg)
+def log_warn(msg: str) -> None: _get_logger().warning(msg)
+def log_error(msg: str) -> None: _get_logger().error(msg)
+def log_debug(msg: str) -> None: _get_logger().debug(msg)
 
-def _emit(level: str, msg) -> None:
-    ts = _dt.datetime.now().strftime("%H:%M:%S")
-    line = f"[{ts}] {level}: {msg}"
-    # -> journald
+def df_brief(df, rows: int = 5, cols: int = 8):
     try:
-        print(line, flush=True)
+        sub = df.copy()
+        if getattr(sub, "columns", None) is not None: sub = sub.iloc[:, :cols]
+        if rows: sub = sub.head(rows)
+        return sub
+    except Exception:
+        return df
+
+def setup_debug_ui(st):
+    try:
+        with st.expander("🔧 Debug", expanded=False):
+            st.caption(f"Loggfil: `{_LOG_PATH}`")
+            if st.button("Skriv testlogg"):
+                log_info(f"Testlogg från UI {dt.datetime.now():%Y-%m-%d %H:%M:%S}")
+                st.success("Skrev en rad till loggen.")
     except Exception:
         pass
-    # -> UI
-    if st is not None and st.session_state.get(DEBUG_KEY, False):
-        try:
-            if level == "INFO":
-                st.info(msg)
-            elif level == "WARN":
-                st.warning(msg)
-            elif level == "ERROR":
-                st.error(msg)
-            else:
-                st.write(msg)
-        except Exception:
-            pass
 
-def log_info(msg):  _emit("INFO",  msg)
-def log_warn(msg):  _emit("WARN",  msg)
-def log_error(msg): _emit("ERROR", msg)
-
-def df_brief(df, name="df"):
-    """Kort rad om en DataFrame (för logg). Klarar None/fel."""
-    try:
-        import pandas as pd  # noqa
-        if df is None:
-            return f"{name}: None"
-        r = getattr(df, "shape", None)
-        n = len(df) if hasattr(df, "__len__") else "?"
-        try:
-            d0 = getattr(df.index.min(), "date", lambda: None)()
-            d1 = getattr(df.index.max(), "date", lambda: None)()
-        except Exception:
-            d0 = d1 = None
-        cols = list(getattr(df, "columns", []))[:8]
-        return f"{name}: rows={n}, shape={r}, dates={d0}→{d1}, cols={cols}"
-    except Exception as e:
-        return f"{name}: (kunde inte summera: {e})"
+# Fallback för gamla funktionsnamn: returnera no-op för alla okända attribut
+def __getattr__(name):
+    def _noop(*a, **k): pass
+    return _noop

@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "VOLV B – conservative",
+      "ticker": "VOLV B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 29.81153994433517,
+        "rsi_max": 71.49896399711605,
+        "use_trend_filter": true,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 90,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 12,
+        "macd_slow": 34,
+        "macd_signal": 8,
+        "use_bb_filter": false,
+        "bb_window": 22,
+        "bb_nstd": 2.491462990618127,
+        "bb_min": 0.22986164344803695,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.09305880727332455,
+        "atr_window": 15,
+        "atr_mult": 2.412620055385559,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 1.9278562720874408
+      },
+      "metrics": {
+        "TotalReturn": 0.5931308156646546,
+        "MaxDD": -0.14651540870455837,
+        "SharpeD": 0.8257607431889507,
+        "BuyHold": 0.6276595744680851,
+        "CAGR": 0.09785413520513786
+      }
+    },
+    {
+      "name": "VOLV B – balanced",
+      "ticker": "VOLV B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 8,
+        "rsi_min": 28.19125813846256,
+        "rsi_max": 73.56601254083618,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 125,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 10,
+        "macd_slow": 33,
+        "macd_signal": 9,
+        "use_bb_filter": true,
+        "bb_window": 16,
+        "bb_nstd": 1.7497141177042816,
+        "bb_min": 0.39795262550696386,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.05935593074040938,
+        "atr_window": 12,
+        "atr_mult": 2.7540538342803895,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 1.7365342015059595
+      },
+      "metrics": {
+        "TotalReturn": 0.7207005001718712,
+        "MaxDD": -0.238683444268734,
+        "SharpeD": 0.8849040762710738,
+        "BuyHold": 0.6276595744680851,
+        "CAGR": 0.11493877193997593
+      }
+    },
+    {
+      "name": "VOLV B – aggressive",
+      "ticker": "VOLV B",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 34.6508564018162,
+        "rsi_max": 73.45981920537176,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 56,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 12,
+        "macd_slow": 27,
+        "macd_signal": 9,
+        "use_bb_filter": false,
+        "bb_window": 18,
+        "bb_nstd": 2.4233688861331157,
+        "bb_min": 0.4066403126352752,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.14661062444545542,
+        "atr_window": 14,
+        "atr_mult": 2.636590279062219,
+        "use_atr_trailing": false,
+        "atr_trail_mult": 2.6083652405328395
+      },
+      "metrics": {
+        "TotalReturn": 0.9531355551094216,
+        "MaxDD": -0.16359575185502773,
+        "SharpeD": 0.8695458321487654,
+        "BuyHold": 0.6276595744680851,
+        "CAGR": 0.14362096887404552
+      }
+    }
+  ]
+}

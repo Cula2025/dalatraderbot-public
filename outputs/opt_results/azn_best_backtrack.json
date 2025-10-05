@@ -1,0 +1,115 @@
+{
+  "profiles": [
+    {
+      "name": "azn – conservative",
+      "ticker": "azn",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 26.28204972857959,
+        "rsi_max": 78.11182647108639,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 133,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 8,
+        "macd_slow": 20,
+        "macd_signal": 9,
+        "use_bb_filter": true,
+        "bb_window": 22,
+        "bb_nstd": 2.1597710816521465,
+        "bb_min": 0.48637632828616817,
+        "use_stop_loss": false,
+        "stop_mode": "atr",
+        "stop_loss_pct": 0.11468458582976956,
+        "atr_window": 20,
+        "atr_mult": 1.9134151237698345,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 2.579673796924684
+      },
+      "metrics": {
+        "TotalReturn": 0.8007720579466655,
+        "MaxDD": -0.10195601935750331,
+        "SharpeD": 1.036616825113788,
+        "BuyHold": 0.4685778412568862,
+        "CAGR": 0.12507852143965525
+      }
+    },
+    {
+      "name": "azn – balanced",
+      "ticker": "azn",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 12,
+        "rsi_min": 28.428131126904372,
+        "rsi_max": 80.71333654589135,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 82,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 12,
+        "macd_slow": 20,
+        "macd_signal": 10,
+        "use_bb_filter": false,
+        "bb_window": 25,
+        "bb_nstd": 1.5777827911829085,
+        "bb_min": 0.3743027548026392,
+        "use_stop_loss": true,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.0712329604606023,
+        "atr_window": 10,
+        "atr_mult": 2.768163949567505,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 1.9526587500274146
+      },
+      "metrics": {
+        "TotalReturn": 0.9004618822797179,
+        "MaxDD": -0.17899145375317949,
+        "SharpeD": 0.8626896788207732,
+        "BuyHold": 0.4685778412568862,
+        "CAGR": 0.13729010697358257
+      }
+    },
+    {
+      "name": "azn – aggressive",
+      "ticker": "azn",
+      "params": {
+        "use_rsi_filter": true,
+        "rsi_window": 19,
+        "rsi_min": 34.231527321449455,
+        "rsi_max": 79.68010852074049,
+        "use_trend_filter": false,
+        "trend_ma_type": "EMA",
+        "trend_ma_window": 159,
+        "breakout_lookback": 55,
+        "exit_lookback": 20,
+        "use_macd_filter": false,
+        "macd_fast": 13,
+        "macd_slow": 23,
+        "macd_signal": 8,
+        "use_bb_filter": false,
+        "bb_window": 28,
+        "bb_nstd": 1.7087201157370462,
+        "bb_min": 0.1477363633708767,
+        "use_stop_loss": false,
+        "stop_mode": "pct",
+        "stop_loss_pct": 0.05101828872170444,
+        "atr_window": 13,
+        "atr_mult": 2.0184811257644997,
+        "use_atr_trailing": true,
+        "atr_trail_mult": 3.0986295627014995
+      },
+      "metrics": {
+        "TotalReturn": 0.7929959510428717,
+        "MaxDD": -0.17776189021036304,
+        "SharpeD": 0.7564964448152305,
+        "BuyHold": 0.4685778412568862,
+        "CAGR": 0.12410343979218852
+      }
+    }
+  ]
+}
